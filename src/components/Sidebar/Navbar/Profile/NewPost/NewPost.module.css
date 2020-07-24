@@ -1,0 +1,31 @@
+.newPost{
+  background-color: #fff;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 10px 0 10px 30px;
+}
+
+.input{
+  margin-left: 10px;
+}
+.input input{
+  height: 40px;
+  width: 300px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  padding: 0 15px;
+  background-color: #f1f1f1;
+}
+.input button{
+  margin-left: 10px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  padding: 0 20px;
+  outline: none;
+  cursor: pointer;
+  background-color: #e04533;
+  color: #fff;
+}

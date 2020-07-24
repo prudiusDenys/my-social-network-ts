@@ -1,0 +1,15 @@
+.header{
+  display: grid;
+  grid-area: header;
+  grid-template-columns: 1fr 10fr 2fr 1fr;
+  align-items: center;
+  justify-items: center;
+  background-color: #fff;
+  padding: 10px 0;
+}
+.logo{
+  color: #e04533;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 6px;
+}

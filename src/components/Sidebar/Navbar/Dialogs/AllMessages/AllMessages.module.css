@@ -1,0 +1,34 @@
+.allMessages{
+  padding: 30px;
+  background-color: white;
+}
+.title{
+  margin-bottom: 30px;
+  text-align: center;
+}
+.message{
+  align-items: center;
+}
+.message button{
+  margin-left: 10px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  padding: 0 20px;
+  outline: none;
+  cursor: pointer;
+  background-color: #e04533;
+  color: #fff;
+}
+textarea{
+  display: block;
+  min-height: 100px;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e04533;
+  margin-bottom: 15px;
+  outline: none;
+  border-radius: 10px;
+  resize: none;
+}
+

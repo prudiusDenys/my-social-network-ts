@@ -1,0 +1,26 @@
+.listMessages{
+  padding: 15px;
+  margin-top: 30px;
+  background-color: aqua;
+  color: white;
+  border-radius: 10px;
+}
+.sentMessage{
+  background-color: #e04533;
+  padding: 1px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.sender, .guess{
+  display: block;
+  margin-right: 30px;
+  padding: 0 15px;
+}
+
+.gotMessage{
+  margin-left: 30px;
+  background-color: chocolate;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}

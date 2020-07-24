@@ -1,0 +1,6 @@
+.headerSearch input{
+  border: none;
+  padding: 0 10px;
+  width: 200px;
+  outline: none;
+}

@@ -1,0 +1,17 @@
+.navbar{
+  background-color: #fff;
+  padding: 30px 0 30px 0;
+}
+
+.navLink{
+
+  width: 100%;
+  font-size: 18px;
+  line-height: 50px;
+  padding-left: 30px;
+}
+
+.active{
+  background-color: #e04533;
+  color: #fff;
+}
