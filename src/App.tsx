@@ -13,6 +13,11 @@ import {StateType} from "./redux/State";
 
 type propsType = {
 	State: StateType
+	addPost: (inputValue: string | undefined)=> void
+	onChangeInput: (inputValue: string)=>void
+	onChangeTextarea: (textAreaValue: string)=>void
+	addMessage: (textAreaValue: string | undefined)=>void
+
 }
 
 function App(props: propsType) {
@@ -22,10 +27,17 @@ function App(props: propsType) {
 				<Header/>
 				<Sidebar/>
 				<div className='content-wrapper'>
-					<Route path={'/profile'} render={() => <Profile postData={props.State.Profile.postData}/>}/>
+					<Route path={'/profile'} render={() => <Profile postData={props.State.Profile.postData}
+																													inputValue={props.State.Profile.inputValue}
+																													addPost={props.addPost}
+																													onChangeInput = {props.onChangeInput}
+					/>}/>
 					<Route path={'/dialogs'} render={() => <Dialogs userData={props.State.Dialogs.contactsData}
 																													sentMessages={props.State.Dialogs.sentMessages}
-																													gotMessages={props.State.Dialogs.gotMessages}/>}/>
+																													gotMessages={props.State.Dialogs.gotMessages}
+																													newMessageText={props.State.Dialogs.newMessageText}
+																													onChangeTextarea={props.onChangeTextarea}
+																													addMessage={props.addMessage}/>}/>
 					<Route path={'/music'} render={() => <Music/>}/>
 					<Route path={'/news'} render={() => <News/>}/>
 					<Route path={'/settings'} render={() => <Settings/>}/>

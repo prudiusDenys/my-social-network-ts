@@ -7,11 +7,14 @@ import Posts from "./Posts/Posts";
 
 type propsType = {
 	postData: Array<PostDataType>
+	inputValue: string
+	addPost: (inputValue: string | undefined)=> void
+	onChangeInput: (onChangeInput: string)=> void
 }
 const Profile = (props: propsType) => {
 	return (
 		<div className={classes.profile}>
-			<NewPost/>
+			<NewPost addPost={props.addPost} inputValue = {props.inputValue} onChangeInput={props.onChangeInput}/>
 			<Posts postData={props.postData}/>
 		</div>
 	)

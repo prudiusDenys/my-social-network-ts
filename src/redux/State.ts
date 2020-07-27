@@ -3,6 +3,7 @@ export type StateType = {
 	Profile: ProfileType
 }
 export type DialogsType = {
+	newMessageText: string
 	contactsData: Array<UserDataType>
 	sentMessages: Array<SentMessagesType>
 	gotMessages: Array<GotMessagesType>
@@ -22,6 +23,7 @@ export type GotMessagesType = {
 	text: string
 }
 export type ProfileType = {
+	inputValue: string
 	postData: Array<PostDataType>
 }
 export type PostDataType = {
@@ -31,8 +33,12 @@ export type PostDataType = {
 	time: string
 }
 
-const State: StateType = {
+let rerenderEntireTree = () => {
+}
+
+let State: StateType = {
 	Dialogs: {
+		newMessageText: '',
 		contactsData: [
 			{
 				id: 1,
@@ -61,10 +67,40 @@ const State: StateType = {
 		],
 	},
 	Profile: {
+		inputValue: 'It-Inkubator',
 		postData: [
-			{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'}
+			{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
 		]
 	}
+}
+
+export const addPost = (inputValue: string | undefined) => {
+	if (inputValue) {
+		let newPost = {id: 2, name: 'Denis', text: inputValue, time: '2 minutes ago'}
+		State.Profile.postData.push(newPost)
+		State.Profile.inputValue = '';
+		rerenderEntireTree()
+	}
+}
+export const onChangeInput = (inputValue: string) => {
+	State.Profile.inputValue = inputValue
+	rerenderEntireTree()
+}
+export const addMessage = (textAreaValue: string | undefined) => {
+	if (textAreaValue) {
+		let newMessage = {id: 4, text: textAreaValue}
+		State.Dialogs.sentMessages.push(newMessage)
+		State.Dialogs.newMessageText = '';
+		rerenderEntireTree()
+	}
+}
+export const onChangeTextarea = (textAreaValue: string) => {
+	State.Dialogs.newMessageText = textAreaValue
+	rerenderEntireTree();
+}
+
+export const subscribe = (observer: any) => {
+	rerenderEntireTree = observer
 }
 
 export default State;

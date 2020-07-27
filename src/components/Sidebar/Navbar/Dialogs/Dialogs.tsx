@@ -8,6 +8,9 @@ type PropsType = {
 	userData: Array<UserDataType>
 	sentMessages: Array<SentMessagesType>
 	gotMessages: Array<GotMessagesType>
+	newMessageText: string
+	onChangeTextarea: (textAreaValue: string)=>void
+	addMessage: (textAreaValue: string | undefined)=>void
 }
 
 const Dialogs = (props: PropsType) => {
@@ -19,7 +22,7 @@ const Dialogs = (props: PropsType) => {
 			<div className={classes.dialogsBox}>
 				<Contacts userData={props.userData}/>
 				<AllMessages sentMessages={props.sentMessages}
-										 gotMessages={props.gotMessages}/>
+										 gotMessages={props.gotMessages} newMessageText={props.newMessageText} onChangeTextarea={props.onChangeTextarea} addMessage={props.addMessage}/>
 			</div>
 		</div>
 	)
