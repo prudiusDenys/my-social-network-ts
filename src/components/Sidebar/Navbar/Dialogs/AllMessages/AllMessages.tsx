@@ -1,15 +1,20 @@
 import React, {ChangeEvent} from "react";
 import classes from "./AllMessages.module.css";
 import ListMessages from "./ListMessages/ListMessages";
-import {GotMessagesType, SentMessagesType} from "../../../../../redux/State";
+import {
+	AddMessageActionType,
+	AddPostActionType,
+	GotMessagesType,
+	OnChangeInputActionType, OnChangeTextareaActionType,
+	SentMessagesType
+} from "../../../../../redux/State";
 
 
 type PropsType = {
 	sentMessages: Array<SentMessagesType>
 	gotMessages: Array<GotMessagesType>
 	newMessageText: string
-	onChangeTextarea: (textAreaValue: string)=>void
-	addMessage: (textAreaValue: string | undefined)=>void
+	dispatch: (action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType) => void
 }
 
 const AllMessages = (props: PropsType) => {
@@ -17,11 +22,11 @@ const AllMessages = (props: PropsType) => {
 	let onChange = React.createRef<HTMLTextAreaElement>()
 
 	let onClickHandler = () => {
-		props.addMessage(onChange.current?.value)
+		props.dispatch({type: 'ADD_MESSAGE', textAreaValue: onChange.current?.value})
 	}
 
 	let onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-		props.onChangeTextarea(e.currentTarget.value)
+		props.dispatch({type: 'ON_CHANGE_TEXTAREA', textAreaValue:e.currentTarget.value})
 	}
 
 	return (

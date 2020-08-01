@@ -1,6 +1,13 @@
 import React from "react";
 import classes from "./Dialogs.module.css";
-import {GotMessagesType, SentMessagesType, UserDataType} from "../../../../redux/State";
+import {
+	AddMessageActionType,
+	AddPostActionType,
+	GotMessagesType,
+	OnChangeInputActionType, OnChangeTextareaActionType,
+	SentMessagesType,
+	UserDataType
+} from "../../../../redux/State";
 import Contacts from "./Contacts/Contacts";
 import AllMessages from "./AllMessages/AllMessages";
 
@@ -9,8 +16,7 @@ type PropsType = {
 	sentMessages: Array<SentMessagesType>
 	gotMessages: Array<GotMessagesType>
 	newMessageText: string
-	onChangeTextarea: (textAreaValue: string)=>void
-	addMessage: (textAreaValue: string | undefined)=>void
+	dispatch: (action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType) => void
 }
 
 const Dialogs = (props: PropsType) => {
@@ -22,7 +28,9 @@ const Dialogs = (props: PropsType) => {
 			<div className={classes.dialogsBox}>
 				<Contacts userData={props.userData}/>
 				<AllMessages sentMessages={props.sentMessages}
-										 gotMessages={props.gotMessages} newMessageText={props.newMessageText} onChangeTextarea={props.onChangeTextarea} addMessage={props.addMessage}/>
+										 gotMessages={props.gotMessages}
+										 newMessageText={props.newMessageText}
+										 dispatch={props.dispatch}/>
 			</div>
 		</div>
 	)

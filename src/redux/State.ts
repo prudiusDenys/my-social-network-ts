@@ -1,3 +1,10 @@
+export type StoreType = {
+	_State: StateType
+	_callSubscriber:()=>void
+	getState: ()=> StateType
+	subscribe: (observer: ()=>void)=>void
+	dispatch:(action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType)=>void
+}
 export type StateType = {
 	Dialogs: DialogsType
 	Profile: ProfileType
@@ -32,75 +39,98 @@ export type PostDataType = {
 	text: string,
 	time: string
 }
-
-let rerenderEntireTree = () => {
+export type AddPostActionType = {
+	type: 'ADD-POST'
+	inputValue: string | undefined
+}
+export type OnChangeInputActionType = {
+	type: 'ON_CHANGE_INPUT'
+	inputValue: string
+}
+export type AddMessageActionType = {
+	type: 'ADD_MESSAGE'
+	textAreaValue: string | undefined
+}
+export type OnChangeTextareaActionType = {
+	type: 'ON_CHANGE_TEXTAREA'
+	textAreaValue: string
 }
 
-let State: StateType = {
-	Dialogs: {
-		newMessageText: '',
-		contactsData: [
-			{
-				id: 1,
-				name: 'Mark Gruk',
-				avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
-			},
-			{
-				id: 2,
-				name: 'Alina Morgunova',
-				avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
-			},
-			{
-				id: 3,
-				name: 'Rustam Gasanov',
-				avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
-			},
-		],
-		sentMessages: [
-			{id: 1, text: 'Hello. My name is Denis'},
-			{id: 2, text: 'What come over you ?'},
-			{id: 3, text: 'Nice nice nice'}
-		],
-		gotMessages: [
-			{id: 1, fullName: 'Mark', text: 'Hello. My name is Mark'},
-			{id: 2, fullName: 'Mark', text: 'I live in Kiev'},
-		],
+let store:StoreType = {
+	_State: {
+		Dialogs: {
+			newMessageText: '',
+			contactsData: [
+				{
+					id: 1,
+					name: 'Mark Gruk',
+					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
+				},
+				{
+					id: 2,
+					name: 'Alina Morgunova',
+					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
+				},
+				{
+					id: 3,
+					name: 'Rustam Gasanov',
+					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
+				},
+			],
+			sentMessages: [
+				{id: 1, text: 'Hello. My name is Denis'},
+				{id: 2, text: 'What come over you ?'},
+				{id: 3, text: 'Nice nice nice'}
+			],
+			gotMessages: [
+				{id: 1, fullName: 'Mark', text: 'Hello. My name is Mark'},
+				{id: 2, fullName: 'Mark', text: 'I live in Kiev'},
+			],
+		},
+		Profile: {
+			inputValue: 'It-Inkubator',
+			postData: [
+				{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
+			]
+		}
 	},
-	Profile: {
-		inputValue: 'It-Inkubator',
-		postData: [
-			{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
-		]
-	}
+	_callSubscriber() {
+		console.log('state changed')
+	},
+	getState() {
+		return this._State
+	},
+	subscribe(observer) {
+		this._callSubscriber = observer
+	},
+	dispatch(action) {
+
+		switch (action.type) {
+			case 'ADD-POST':
+				if (action.inputValue) {
+					let newPost = {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}
+					this._State.Profile.postData.push(newPost)
+					this._State.Profile.inputValue = '';
+					this._callSubscriber()
+				}
+				return;
+			case 'ON_CHANGE_INPUT':
+				this._State.Profile.inputValue = action.inputValue
+				this._callSubscriber()
+				return;
+			case 'ADD_MESSAGE':
+				if (action.textAreaValue) {
+					let newMessage = {id: 4, text: action.textAreaValue}
+					this._State.Dialogs.sentMessages.push(newMessage)
+					this._State.Dialogs.newMessageText = '';
+					this._callSubscriber()
+				}
+				return;
+			case 'ON_CHANGE_TEXTAREA':
+				this._State.Dialogs.newMessageText = action.textAreaValue
+				this._callSubscriber();
+		}
+	},
 }
 
-export const addPost = (inputValue: string | undefined) => {
-	if (inputValue) {
-		let newPost = {id: 2, name: 'Denis', text: inputValue, time: '2 minutes ago'}
-		State.Profile.postData.push(newPost)
-		State.Profile.inputValue = '';
-		rerenderEntireTree()
-	}
-}
-export const onChangeInput = (inputValue: string) => {
-	State.Profile.inputValue = inputValue
-	rerenderEntireTree()
-}
-export const addMessage = (textAreaValue: string | undefined) => {
-	if (textAreaValue) {
-		let newMessage = {id: 4, text: textAreaValue}
-		State.Dialogs.sentMessages.push(newMessage)
-		State.Dialogs.newMessageText = '';
-		rerenderEntireTree()
-	}
-}
-export const onChangeTextarea = (textAreaValue: string) => {
-	State.Dialogs.newMessageText = textAreaValue
-	rerenderEntireTree();
-}
-
-export const subscribe = (observer: any) => {
-	rerenderEntireTree = observer
-}
-
-export default State;
+export default store;

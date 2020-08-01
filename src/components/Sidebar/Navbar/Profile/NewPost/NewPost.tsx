@@ -1,10 +1,15 @@
 import React, {ChangeEvent} from "react";
 import classes from "./NewPost.module.css";
 import Avatar from "../../../../../common/Avatar/Avatar";
+import {
+	AddMessageActionType,
+	AddPostActionType,
+	OnChangeInputActionType,
+	OnChangeTextareaActionType
+} from "../../../../../redux/State";
 
 type PropsType = {
-	addPost: (inputValue:string | undefined)=>void
-	onChangeInput: (inputValue:string)=>void
+	dispatch:(action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType)=>void
 	inputValue: string
 }
 
@@ -14,11 +19,11 @@ const NewPost = (props: PropsType) => {
 
 	let onClickHandler = () => {
 		let inputValue = onChange.current?.value;
-		props.addPost(inputValue)
+		props.dispatch({type: 'ADD-POST', inputValue: inputValue})
 	}
 
 	let onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		props.onChangeInput(e.currentTarget.value)
+		props.dispatch({type: 'ON_CHANGE_INPUT', inputValue: e.currentTarget.value})
 	}
 
 	return (
