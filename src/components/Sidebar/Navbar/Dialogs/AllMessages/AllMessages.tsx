@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import classes from "./AllMessages.module.css";
 import ListMessages from "./ListMessages/ListMessages";
 import {
+	ActionsTypes,
 	AddMessageActionType,
 	AddPostActionType,
 	GotMessagesType,
@@ -14,7 +15,7 @@ type PropsType = {
 	sentMessages: Array<SentMessagesType>
 	gotMessages: Array<GotMessagesType>
 	newMessageText: string
-	dispatch: (action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType) => void
+	dispatch: (action: ActionsTypes) => void
 }
 
 const AllMessages = (props: PropsType) => {

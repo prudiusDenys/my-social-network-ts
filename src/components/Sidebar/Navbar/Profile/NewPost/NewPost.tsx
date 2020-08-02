@@ -2,16 +2,18 @@ import React, {ChangeEvent} from "react";
 import classes from "./NewPost.module.css";
 import Avatar from "../../../../../common/Avatar/Avatar";
 import {
-	AddMessageActionType,
-	AddPostActionType,
+	ActionsTypes,
+	AddMessageActionType, addPostActionCreator,
+	AddPostActionType, onChangeInputActionCreator,
 	OnChangeInputActionType,
 	OnChangeTextareaActionType
 } from "../../../../../redux/State";
 
 type PropsType = {
-	dispatch:(action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType)=>void
+	dispatch:(action: ActionsTypes)=>void
 	inputValue: string
 }
+
 
 const NewPost = (props: PropsType) => {
 
@@ -19,11 +21,12 @@ const NewPost = (props: PropsType) => {
 
 	let onClickHandler = () => {
 		let inputValue = onChange.current?.value;
-		props.dispatch({type: 'ADD-POST', inputValue: inputValue})
+		props.dispatch(addPostActionCreator(inputValue))
 	}
 
 	let onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		props.dispatch({type: 'ON_CHANGE_INPUT', inputValue: e.currentTarget.value})
+		let inputValue = e.currentTarget.value
+		props.dispatch(onChangeInputActionCreator(inputValue))
 	}
 
 	return (

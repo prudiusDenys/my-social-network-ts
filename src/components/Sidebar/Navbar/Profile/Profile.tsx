@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Profile.module.css";
 import {
+	ActionsTypes,
 	AddMessageActionType,
 	AddPostActionType,
 	OnChangeInputActionType,
@@ -12,7 +13,7 @@ import Posts from "./Posts/Posts";
 
 
 type propsType = {
-	dispatch:(action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType)=>void
+	dispatch:(action: ActionsTypes)=>void
 	postData: Array<PostDataType>
 	inputValue: string
 }

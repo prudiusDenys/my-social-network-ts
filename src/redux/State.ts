@@ -3,12 +3,13 @@ export type StoreType = {
 	_callSubscriber:()=>void
 	getState: ()=> StateType
 	subscribe: (observer: ()=>void)=>void
-	dispatch:(action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType)=>void
+	dispatch:(action: ActionsTypes)=>void
 }
 export type StateType = {
 	Dialogs: DialogsType
 	Profile: ProfileType
 }
+export type ActionsTypes = AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType
 export type DialogsType = {
 	newMessageText: string
 	contactsData: Array<UserDataType>
@@ -55,6 +56,10 @@ export type OnChangeTextareaActionType = {
 	type: 'ON_CHANGE_TEXTAREA'
 	textAreaValue: string
 }
+
+
+const ADD_POST = 'ADD-POST';
+const ON_CHANGE_INPUT = 'ON_CHANGE_INPUT';
 
 let store:StoreType = {
 	_State: {
@@ -106,7 +111,7 @@ let store:StoreType = {
 	dispatch(action) {
 
 		switch (action.type) {
-			case 'ADD-POST':
+			case ADD_POST:
 				if (action.inputValue) {
 					let newPost = {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}
 					this._State.Profile.postData.push(newPost)
@@ -114,7 +119,7 @@ let store:StoreType = {
 					this._callSubscriber()
 				}
 				return;
-			case 'ON_CHANGE_INPUT':
+			case ON_CHANGE_INPUT:
 				this._State.Profile.inputValue = action.inputValue
 				this._callSubscriber()
 				return;
@@ -131,6 +136,20 @@ let store:StoreType = {
 				this._callSubscriber();
 		}
 	},
+}
+
+export const addPostActionCreator = (inputValue: string | undefined): AddPostActionType => {
+	return {
+		type: ADD_POST,
+		inputValue: inputValue
+	}
+}
+
+export const onChangeInputActionCreator = (inputValue: string):OnChangeInputActionType => {
+	return {
+		type: ON_CHANGE_INPUT,
+		inputValue: inputValue
+	}
 }
 
 export default store;

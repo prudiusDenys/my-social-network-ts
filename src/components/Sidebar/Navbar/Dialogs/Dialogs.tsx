@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Dialogs.module.css";
 import {
+	ActionsTypes,
 	AddMessageActionType,
 	AddPostActionType,
 	GotMessagesType,
@@ -16,7 +17,7 @@ type PropsType = {
 	sentMessages: Array<SentMessagesType>
 	gotMessages: Array<GotMessagesType>
 	newMessageText: string
-	dispatch: (action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType) => void
+	dispatch: (action: ActionsTypes) => void
 }
 
 const Dialogs = (props: PropsType) => {

@@ -9,6 +9,7 @@ import News from "./components/Sidebar/Navbar/News/News";
 import Settings from "./components/Sidebar/Navbar/Settings/Settings";
 import Music from "./components/Sidebar/Navbar/Music/Music";
 import {
+	ActionsTypes,
 	AddMessageActionType,
 	AddPostActionType,
 	OnChangeInputActionType,
@@ -19,7 +20,7 @@ import {
 
 type propsType = {
 	State: StateType
-	dispatch: (action: AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType) => void
+	dispatch: (action: ActionsTypes) => void
 }
 
 function App(props: propsType) {
