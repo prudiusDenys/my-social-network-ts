@@ -1,16 +1,8 @@
 import React from "react";
 import classes from "./Profile.module.css";
-import {
-	ActionsTypes,
-	AddMessageActionType,
-	AddPostActionType,
-	OnChangeInputActionType,
-	OnChangeTextareaActionType,
-	PostDataType
-} from "../../../../redux/State";
+import {ActionsTypes, PostDataType} from "../../../../redux/State";
 import NewPost from "./NewPost/NewPost";
 import Posts from "./Posts/Posts";
-
 
 type propsType = {
 	dispatch:(action: ActionsTypes)=>void

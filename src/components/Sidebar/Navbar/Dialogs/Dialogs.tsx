@@ -2,10 +2,7 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import {
 	ActionsTypes,
-	AddMessageActionType,
-	AddPostActionType,
 	GotMessagesType,
-	OnChangeInputActionType, OnChangeTextareaActionType,
 	SentMessagesType,
 	UserDataType
 } from "../../../../redux/State";

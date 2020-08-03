@@ -1,15 +1,19 @@
 export type StoreType = {
 	_State: StateType
-	_callSubscriber:()=>void
-	getState: ()=> StateType
-	subscribe: (observer: ()=>void)=>void
-	dispatch:(action: ActionsTypes)=>void
+	_callSubscriber: () => void
+	getState: () => StateType
+	subscribe: (observer: () => void) => void
+	dispatch: (action: ActionsTypes) => void
 }
 export type StateType = {
 	Dialogs: DialogsType
 	Profile: ProfileType
 }
-export type ActionsTypes = AddPostActionType | OnChangeInputActionType | AddMessageActionType | OnChangeTextareaActionType
+export type ActionsTypes =
+	AddPostActionType
+	| OnChangeInputActionType
+	| AddMessageActionType
+	| OnChangeTextareaActionType
 export type DialogsType = {
 	newMessageText: string
 	contactsData: Array<UserDataType>
@@ -60,8 +64,11 @@ export type OnChangeTextareaActionType = {
 
 const ADD_POST = 'ADD-POST';
 const ON_CHANGE_INPUT = 'ON_CHANGE_INPUT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+const ON_CHANGE_TEXTAREA = 'ON_CHANGE_TEXTAREA';
 
-let store:StoreType = {
+
+let store: StoreType = {
 	_State: {
 		Dialogs: {
 			newMessageText: '',
@@ -123,7 +130,7 @@ let store:StoreType = {
 				this._State.Profile.inputValue = action.inputValue
 				this._callSubscriber()
 				return;
-			case 'ADD_MESSAGE':
+			case ADD_MESSAGE:
 				if (action.textAreaValue) {
 					let newMessage = {id: 4, text: action.textAreaValue}
 					this._State.Dialogs.sentMessages.push(newMessage)
@@ -131,7 +138,7 @@ let store:StoreType = {
 					this._callSubscriber()
 				}
 				return;
-			case 'ON_CHANGE_TEXTAREA':
+			case ON_CHANGE_TEXTAREA:
 				this._State.Dialogs.newMessageText = action.textAreaValue
 				this._callSubscriber();
 		}
@@ -145,10 +152,25 @@ export const addPostActionCreator = (inputValue: string | undefined): AddPostAct
 	}
 }
 
-export const onChangeInputActionCreator = (inputValue: string):OnChangeInputActionType => {
+export const onChangeInputActionCreator = (inputValue: string): OnChangeInputActionType => {
 	return {
 		type: ON_CHANGE_INPUT,
 		inputValue: inputValue
+	}
+}
+
+export const addMessageActionCreator = (textAreaValue: string | undefined): AddMessageActionType => {
+
+	return {
+		type: ADD_MESSAGE,
+		textAreaValue: textAreaValue
+	}
+}
+
+export const onChangeTextareaActionCreator = (textAreaValue: string): OnChangeTextareaActionType => {
+	return {
+		type: ON_CHANGE_TEXTAREA,
+		textAreaValue: textAreaValue
 	}
 }
 

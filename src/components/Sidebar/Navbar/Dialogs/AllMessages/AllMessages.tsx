@@ -2,11 +2,8 @@ import React, {ChangeEvent} from "react";
 import classes from "./AllMessages.module.css";
 import ListMessages from "./ListMessages/ListMessages";
 import {
-	ActionsTypes,
-	AddMessageActionType,
-	AddPostActionType,
-	GotMessagesType,
-	OnChangeInputActionType, OnChangeTextareaActionType,
+	ActionsTypes, addMessageActionCreator,
+	GotMessagesType, onChangeTextareaActionCreator,
 	SentMessagesType
 } from "../../../../../redux/State";
 
@@ -23,11 +20,12 @@ const AllMessages = (props: PropsType) => {
 	let onChange = React.createRef<HTMLTextAreaElement>()
 
 	let onClickHandler = () => {
-		props.dispatch({type: 'ADD_MESSAGE', textAreaValue: onChange.current?.value})
+		props.dispatch(addMessageActionCreator(onChange.current?.value))
 	}
 
-	let onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-		props.dispatch({type: 'ON_CHANGE_TEXTAREA', textAreaValue:e.currentTarget.value})
+	let onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		let textareaValue = e.currentTarget.value;
+		props.dispatch(onChangeTextareaActionCreator(textareaValue))
 	}
 
 	return (
@@ -36,11 +34,12 @@ const AllMessages = (props: PropsType) => {
 				Write your message
 			</div>
 			<div className={classes.message}>
-				<textarea ref={onChange} onChange={onChangeHandler}  placeholder={'Your message...'} value={props.newMessageText}> </textarea>
+				<textarea ref={onChange} onChange={onChangeHandler} placeholder={'Your message...'}
+									value={props.newMessageText}> </textarea>
 				<button onClick={onClickHandler}>Send message</button>
 			</div>
-				<ListMessages sentMessages={props.sentMessages}
-											gotMessages={props.gotMessages}/>
+			<ListMessages sentMessages={props.sentMessages}
+										gotMessages={props.gotMessages}/>
 		</div>
 	)
 }
