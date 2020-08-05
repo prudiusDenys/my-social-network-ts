@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Contacts.module.css";
-import {UserDataType} from "../../../../../redux/State";
+import {UserDataType} from "../../../../../redux/store";
 import ContactUser from "./ContactUser/ContactUser";
 
 type PropsType = {

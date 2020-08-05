@@ -2,10 +2,11 @@ import React, {ChangeEvent} from "react";
 import classes from "./AllMessages.module.css";
 import ListMessages from "./ListMessages/ListMessages";
 import {
-	ActionsTypes, addMessageActionCreator,
-	GotMessagesType, onChangeTextareaActionCreator,
+	ActionsTypes,
+	GotMessagesType,
 	SentMessagesType
-} from "../../../../../redux/State";
+} from "../../../../../redux/store";
+import {addMessageActionCreator, onChangeTextareaActionCreator} from "../../../../../redux/dialogsReducer";
 
 
 type PropsType = {

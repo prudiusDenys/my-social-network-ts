@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./ListMessages.module.css";
-import {GotMessagesType, SentMessagesType} from "../../../../../../redux/State";
+import {GotMessagesType, SentMessagesType} from "../../../../../../redux/store";
 
 
 type PropsType = {

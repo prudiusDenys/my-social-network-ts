@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from "react";
 import classes from "./NewPost.module.css";
 import Avatar from "../../../../../common/Avatar/Avatar";
-import {ActionsTypes,addPostActionCreator,onChangeInputActionCreator,} from "../../../../../redux/State";
+import {ActionsTypes} from "../../../../../redux/store";
+import {addPostActionCreator, onChangeInputActionCreator} from "../../../../../redux/profileReducer";
 
 type PropsType = {
 	dispatch:(action: ActionsTypes)=>void

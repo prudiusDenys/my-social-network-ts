@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Profile.module.css";
-import {ActionsTypes, PostDataType} from "../../../../redux/State";
+import {ActionsTypes, PostDataType} from "../../../../redux/store";
 import NewPost from "./NewPost/NewPost";
 import Posts from "./Posts/Posts";
 

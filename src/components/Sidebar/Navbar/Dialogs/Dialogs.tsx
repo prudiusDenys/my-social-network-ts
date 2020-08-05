@@ -5,7 +5,7 @@ import {
 	GotMessagesType,
 	SentMessagesType,
 	UserDataType
-} from "../../../../redux/State";
+} from "../../../../redux/store";
 import Contacts from "./Contacts/Contacts";
 import AllMessages from "./AllMessages/AllMessages";
 

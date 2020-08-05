@@ -8,14 +8,7 @@ import Dialogs from "./components/Sidebar/Navbar/Dialogs/Dialogs";
 import News from "./components/Sidebar/Navbar/News/News";
 import Settings from "./components/Sidebar/Navbar/Settings/Settings";
 import Music from "./components/Sidebar/Navbar/Music/Music";
-import {
-	ActionsTypes,
-	AddMessageActionType,
-	AddPostActionType,
-	OnChangeInputActionType,
-	OnChangeTextareaActionType,
-	StateType
-} from "./redux/State";
+import {ActionsTypes, StateType} from "./redux/store";
 
 
 type propsType = {

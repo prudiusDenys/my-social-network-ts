@@ -1,3 +1,6 @@
+import {profileReducer} from "./profileReducer";
+import {dialogsReducer} from "./dialogsReducer";
+
 export type StoreType = {
 	_State: StateType
 	_callSubscriber: () => void
@@ -62,13 +65,7 @@ export type OnChangeTextareaActionType = {
 }
 
 
-const ADD_POST = 'ADD-POST';
-const ON_CHANGE_INPUT = 'ON_CHANGE_INPUT';
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const ON_CHANGE_TEXTAREA = 'ON_CHANGE_TEXTAREA';
-
-
-let store: StoreType = {
+const store: StoreType = {
 	_State: {
 		Dialogs: {
 			newMessageText: '',
@@ -116,61 +113,9 @@ let store: StoreType = {
 		this._callSubscriber = observer
 	},
 	dispatch(action) {
-
-		switch (action.type) {
-			case ADD_POST:
-				if (action.inputValue) {
-					let newPost = {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}
-					this._State.Profile.postData.push(newPost)
-					this._State.Profile.inputValue = '';
-					this._callSubscriber()
-				}
-				return;
-			case ON_CHANGE_INPUT:
-				this._State.Profile.inputValue = action.inputValue
-				this._callSubscriber()
-				return;
-			case ADD_MESSAGE:
-				if (action.textAreaValue) {
-					let newMessage = {id: 4, text: action.textAreaValue}
-					this._State.Dialogs.sentMessages.push(newMessage)
-					this._State.Dialogs.newMessageText = '';
-					this._callSubscriber()
-				}
-				return;
-			case ON_CHANGE_TEXTAREA:
-				this._State.Dialogs.newMessageText = action.textAreaValue
-				this._callSubscriber();
-		}
-	},
-}
-
-export const addPostActionCreator = (inputValue: string | undefined): AddPostActionType => {
-	return {
-		type: ADD_POST,
-		inputValue: inputValue
-	}
-}
-
-export const onChangeInputActionCreator = (inputValue: string): OnChangeInputActionType => {
-	return {
-		type: ON_CHANGE_INPUT,
-		inputValue: inputValue
-	}
-}
-
-export const addMessageActionCreator = (textAreaValue: string | undefined): AddMessageActionType => {
-
-	return {
-		type: ADD_MESSAGE,
-		textAreaValue: textAreaValue
-	}
-}
-
-export const onChangeTextareaActionCreator = (textAreaValue: string): OnChangeTextareaActionType => {
-	return {
-		type: ON_CHANGE_TEXTAREA,
-		textAreaValue: textAreaValue
+		this._State.Profile = profileReducer(this._State.Profile, action);
+		this._State.Dialogs = dialogsReducer(this._State.Dialogs, action);
+		this._callSubscriber();
 	}
 }
 
