@@ -2,15 +2,15 @@ import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 
 export type StoreType = {
-	_State: StateType
+	_state: StateType
 	_callSubscriber: () => void
 	getState: () => StateType
 	subscribe: (observer: () => void) => void
 	dispatch: (action: ActionsTypes) => void
 }
 export type StateType = {
-	Dialogs: DialogsType
-	Profile: ProfileType
+	dialogs: DialogsType
+	profile: ProfileType
 }
 export type ActionsTypes =
 	AddPostActionType
@@ -66,8 +66,14 @@ export type OnChangeTextareaActionType = {
 
 
 const store: StoreType = {
-	_State: {
-		Dialogs: {
+	_state: {
+		profile: {
+			inputValue: 'It-Inkubator',
+			postData: [
+				{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
+			]
+		},
+		dialogs: {
 			newMessageText: '',
 			contactsData: [
 				{
@@ -95,26 +101,20 @@ const store: StoreType = {
 				{id: 1, fullName: 'Mark', text: 'Hello. My name is Mark'},
 				{id: 2, fullName: 'Mark', text: 'I live in Kiev'},
 			],
-		},
-		Profile: {
-			inputValue: 'It-Inkubator',
-			postData: [
-				{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
-			]
 		}
 	},
 	_callSubscriber() {
 		console.log('state changed')
 	},
 	getState() {
-		return this._State
+		return this._state
 	},
 	subscribe(observer) {
 		this._callSubscriber = observer
 	},
 	dispatch(action) {
-		this._State.Profile = profileReducer(this._State.Profile, action);
-		this._State.Dialogs = dialogsReducer(this._State.Dialogs, action);
+		this._state.profile = profileReducer(this._state.profile, action);
+		this._state.dialogs = dialogsReducer(this._state.dialogs, action);
 		this._callSubscriber();
 	}
 }

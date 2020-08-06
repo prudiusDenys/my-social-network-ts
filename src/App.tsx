@@ -24,14 +24,14 @@ function App(props: propsType) {
 				<Sidebar/>
 				<div className='content-wrapper'>
 					<Route path={'/profile'} render={() => <Profile dispatch={props.dispatch}
-																													postData={props.State.Profile.postData}
-																													inputValue={props.State.Profile.inputValue}
+																													postData={props.State.profile.postData}
+																													inputValue={props.State.profile.inputValue}
 					/>}/>
 					<Route path={'/dialogs'} render={() => <Dialogs dispatch={props.dispatch}
-																													userData={props.State.Dialogs.contactsData}
-																													sentMessages={props.State.Dialogs.sentMessages}
-																													gotMessages={props.State.Dialogs.gotMessages}
-																													newMessageText={props.State.Dialogs.newMessageText}
+																													userData={props.State.dialogs.contactsData}
+																													sentMessages={props.State.dialogs.sentMessages}
+																													gotMessages={props.State.dialogs.gotMessages}
+																													newMessageText={props.State.dialogs.newMessageText}
 					/>}/>
 					<Route path={'/music'} render={() => <Music/>}/>
 					<Route path={'/news'} render={() => <News/>}/>
