@@ -1,27 +1,23 @@
 import React, {ChangeEvent} from "react";
 import classes from "./NewPost.module.css";
 import Avatar from "../../../../../common/Avatar/Avatar";
-import {ActionsTypes} from "../../../../../redux/store";
-import {addPostActionCreator, onChangeInputActionCreator} from "../../../../../redux/profileReducer";
 
 type PropsType = {
-	dispatch:(action: ActionsTypes)=>void
 	inputValue: string
+	addPost:(inputValue: string | undefined)=>void
+	onChangeInput:(inputValue: string)=>void
 }
-
 
 const NewPost = (props: PropsType) => {
 
 	let onChange = React.createRef<HTMLInputElement>();
 
 	let onClickHandler = () => {
-		let inputValue = onChange.current?.value;
-		props.dispatch(addPostActionCreator(inputValue))
+		props.addPost(onChange.current?.value)
 	}
 
 	let onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		let inputValue = e.currentTarget.value
-		props.dispatch(onChangeInputActionCreator(inputValue))
+		props.onChangeInput(e.currentTarget.value)
 	}
 
 	return (

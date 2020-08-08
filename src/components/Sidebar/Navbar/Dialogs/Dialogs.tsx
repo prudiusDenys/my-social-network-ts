@@ -7,7 +7,7 @@ import {
 	UserDataType
 } from "../../../../redux/store";
 import Contacts from "./Contacts/Contacts";
-import AllMessages from "./AllMessages/AllMessages";
+import AllMessagesContainer from "./AllMessages/AllMessagesContainer";
 
 type PropsType = {
 	userData: Array<UserDataType>
@@ -25,7 +25,7 @@ const Dialogs = (props: PropsType) => {
 			</div>
 			<div className={classes.dialogsBox}>
 				<Contacts userData={props.userData}/>
-				<AllMessages sentMessages={props.sentMessages}
+				<AllMessagesContainer sentMessages={props.sentMessages}
 										 gotMessages={props.gotMessages}
 										 newMessageText={props.newMessageText}
 										 dispatch={props.dispatch}/>

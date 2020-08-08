@@ -2,18 +2,17 @@ import React, {ChangeEvent} from "react";
 import classes from "./AllMessages.module.css";
 import ListMessages from "./ListMessages/ListMessages";
 import {
-	ActionsTypes,
 	GotMessagesType,
 	SentMessagesType
 } from "../../../../../redux/store";
-import {addMessageActionCreator, onChangeTextareaActionCreator} from "../../../../../redux/dialogsReducer";
 
 
 type PropsType = {
 	sentMessages: Array<SentMessagesType>
 	gotMessages: Array<GotMessagesType>
 	newMessageText: string
-	dispatch: (action: ActionsTypes) => void
+	addMessage: (messageValue: string | undefined) => void
+	onChangeTextarea: (textareaValue: string) => void
 }
 
 const AllMessages = (props: PropsType) => {
@@ -21,12 +20,10 @@ const AllMessages = (props: PropsType) => {
 	let onChange = React.createRef<HTMLTextAreaElement>()
 
 	let onClickHandler = () => {
-		props.dispatch(addMessageActionCreator(onChange.current?.value))
+		props.addMessage(onChange.current?.value)
 	}
-
 	let onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		let textareaValue = e.currentTarget.value;
-		props.dispatch(onChangeTextareaActionCreator(textareaValue))
+		props.onChangeTextarea(e.currentTarget.value)
 	}
 
 	return (

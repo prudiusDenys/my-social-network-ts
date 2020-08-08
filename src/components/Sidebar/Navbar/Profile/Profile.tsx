@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./Profile.module.css";
 import {ActionsTypes, PostDataType} from "../../../../redux/store";
-import NewPost from "./NewPost/NewPost";
 import Posts from "./Posts/Posts";
+import NewPostContainer from "./NewPost/NewPostContainer";
 
 type propsType = {
 	dispatch:(action: ActionsTypes)=>void
@@ -12,7 +12,8 @@ type propsType = {
 const Profile = (props: propsType) => {
 	return (
 		<div className={classes.profile}>
-			<NewPost dispatch={props.dispatch} inputValue = {props.inputValue}/>
+			<NewPostContainer dispatch={props.dispatch}
+												inputValue = {props.inputValue}/>
 			<Posts postData={props.postData}/>
 		</div>
 	)
