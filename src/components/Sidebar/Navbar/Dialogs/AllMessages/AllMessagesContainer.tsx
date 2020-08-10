@@ -1,35 +1,30 @@
 import React from "react";
-import {
-	ActionsTypes,
-	GotMessagesType,
-	SentMessagesType
-} from "../../../../../redux/store";
 import {addMessageActionCreator, onChangeTextareaActionCreator} from "../../../../../redux/dialogsReducer";
 import AllMessages from "./AllMessages";
+import StoreContext from "../../../../../StoreContext";
 
 
-type PropsType = {
-	sentMessages: Array<SentMessagesType>
-	gotMessages: Array<GotMessagesType>
-	newMessageText: string
-	dispatch: (action: ActionsTypes) => void
-}
+const AllMessagesContainer = () => {
+	return (
+		<StoreContext.Consumer>
+			{(store) => {
+				let state = store.getState();
+				let addMessage = (messageValue: string | undefined) => {
+					store.dispatch(addMessageActionCreator(messageValue))
+				}
 
-const AllMessagesContainer = (props: PropsType) => {
-
-	let addMessage = (messageValue: string | undefined) => {
-		props.dispatch(addMessageActionCreator(messageValue))
-	}
-
-	let onChangeTextarea = (textareaValue: string) => {
-		props.dispatch(onChangeTextareaActionCreator(textareaValue))
-	}
-
-	return <AllMessages addMessage={addMessage}
-											onChangeTextarea={onChangeTextarea}
-											gotMessages={props.gotMessages}
-											newMessageText={props.newMessageText}
-											sentMessages={props.sentMessages}/>
+				let onChangeTextarea = (textareaValue: string) => {
+					store.dispatch(onChangeTextareaActionCreator(textareaValue))
+				}
+				return <AllMessages addMessage={addMessage}
+														onChangeTextarea={onChangeTextarea}
+														gotMessages={state.dialogs.gotMessages}
+														newMessageText={state.dialogs.newMessageText}
+														sentMessages={state.dialogs.sentMessages}/>
+			}
+			}
+		</StoreContext.Consumer>
+	)
 }
 
 export default AllMessagesContainer;

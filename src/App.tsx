@@ -8,31 +8,16 @@ import Dialogs from "./components/Sidebar/Navbar/Dialogs/Dialogs";
 import News from "./components/Sidebar/Navbar/News/News";
 import Settings from "./components/Sidebar/Navbar/Settings/Settings";
 import Music from "./components/Sidebar/Navbar/Music/Music";
-import {ActionsTypes, StateType} from "./redux/store";
 
-
-type propsType = {
-	State: StateType
-	dispatch: (action: ActionsTypes) => void
-}
-
-function App(props: propsType) {
+function App() {
 	return (
 		<BrowserRouter>
 			<div className="App">
 				<Header/>
 				<Sidebar/>
 				<div className='content-wrapper'>
-					<Route path={'/profile'} render={() => <Profile dispatch={props.dispatch}
-																													postData={props.State.profile.postData}
-																													inputValue={props.State.profile.inputValue}
-					/>}/>
-					<Route path={'/dialogs'} render={() => <Dialogs dispatch={props.dispatch}
-																													userData={props.State.dialogs.contactsData}
-																													sentMessages={props.State.dialogs.sentMessages}
-																													gotMessages={props.State.dialogs.gotMessages}
-																													newMessageText={props.State.dialogs.newMessageText}
-					/>}/>
+					<Route path={'/profile'} render={() => <Profile/>}/>
+					<Route path={'/dialogs'} render={() => <Dialogs/>}/>
 					<Route path={'/music'} render={() => <Music/>}/>
 					<Route path={'/news'} render={() => <News/>}/>
 					<Route path={'/settings'} render={() => <Settings/>}/>

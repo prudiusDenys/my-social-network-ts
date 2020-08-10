@@ -1,26 +1,29 @@
 import React from "react";
-import {ActionsTypes} from "../../../../../redux/store";
 import {addPostActionCreator, onChangeInputActionCreator} from "../../../../../redux/profileReducer";
 import NewPost from "./NewPost";
-
-type PropsType = {
-	dispatch:(action: ActionsTypes)=>void
-	inputValue: string
-}
+import StoreContext from "../../../../../StoreContext";
 
 
-const NewPostContainer = (props: PropsType) => {
+const NewPostContainer = () => {
 
-	let addPost = (inputValue: string | undefined) => {
-		props.dispatch(addPostActionCreator(inputValue))
-	}
+	return (
+		<StoreContext.Consumer>
+			{(store) => {
+				let state = store.getState();
 
-	let onChangeInput = (inputValue: string) => {
-		props.dispatch(onChangeInputActionCreator(inputValue))
-	}
+				let addPost = (inputValue: string | undefined) => {
+					store.dispatch(addPostActionCreator(inputValue))
+				}
 
-	return <NewPost addPost={addPost}
-									onChangeInput={onChangeInput}
-									inputValue={props.inputValue}/>
+				let onChangeInput = (inputValue: string) => {
+					store.dispatch(onChangeInputActionCreator(inputValue))
+				}
+
+				return <NewPost addPost={addPost}
+												onChangeInput={onChangeInput}
+												inputValue={state.profile.inputValue}/>}
+			}
+		</StoreContext.Consumer>
+	)
 }
 export default NewPostContainer;

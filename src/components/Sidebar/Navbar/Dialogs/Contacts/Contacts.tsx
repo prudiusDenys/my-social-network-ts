@@ -1,23 +1,24 @@
 import React from "react";
 import classes from "./Contacts.module.css";
-import {UserDataType} from "../../../../../redux/store";
 import ContactUser from "./ContactUser/ContactUser";
+import StoreContext from "../../../../../StoreContext";
 
-type PropsType = {
-	userData: Array<UserDataType>
-}
 
-const Contacts = (props: PropsType) => {
-
-	let contactElement = props.userData.map(c=><ContactUser id={c.id} name={c.name} avatarUrl={c.avatarUrl}/>)
-
+const Contacts = () => {
 	return (
-			<div className={classes.contactsList}>
-				<div className={classes.contactsListTitle}>
-					Your contacts
-				</div>
-				{contactElement}
-			</div>
+		<StoreContext.Consumer>
+			{(store)=>{
+				let state = store.getState();
+				let contactElement = state.dialogs.contactsData.map(c=><ContactUser id={c.id} name={c.name} avatarUrl={c.avatarUrl}/>)
+				return(
+					<div className={classes.contactsList}>
+						<div className={classes.contactsListTitle}>
+							Your contacts
+						</div>
+						{contactElement}
+					</div>)}
+			}
+		</StoreContext.Consumer>
 	)
 }
 
