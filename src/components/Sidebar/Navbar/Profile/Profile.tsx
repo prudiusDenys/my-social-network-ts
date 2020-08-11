@@ -1,14 +1,14 @@
 import React from "react";
 import classes from "./Profile.module.css";
-import Posts from "./Posts/Posts";
 import NewPostContainer from "./NewPost/NewPostContainer";
+import PostsContainer from "./Posts/PostsContainer";
 
 
 const Profile = () => {
 	return (
 		<div className={classes.profile}>
 			<NewPostContainer/>
-			<Posts/>
+			<PostsContainer />
 		</div>
 	)
 }

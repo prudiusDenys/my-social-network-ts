@@ -1,28 +1,22 @@
 import React from "react";
 import classes from "./Posts.module.css";
-import {PostDataType} from "../../../../../redux/store";
 import Post from "./Post/Post";
-import StoreContext from "../../../../../StoreContext";
+import {PostDataType} from "../../../../../redux/store";
 
 
 
+type PropsType = {
+	postData: Array<PostDataType>
+}
 
-const Posts = () => {
+const Posts = (props: PropsType) => {
 
+	let postElement = props.postData.map(p => <Post name={p.name} time={p.time} text={p.text}/>)
 
 	return (
-		<StoreContext.Consumer>
-			{(store) => {
-				let state = store.getState();
-				let postElement = state.profile.postData.map(p => <Post name={p.name} time={p.time} text={p.text}/>)
-				return (
-					<div className={classes.postsWrapper}>
-						{postElement}
-					</div>)
-			}
-			}
-		</StoreContext.Consumer>
-	)
+		<div className={classes.postsWrapper}>
+			{postElement}
+		</div>)
 }
 
 export default Posts;

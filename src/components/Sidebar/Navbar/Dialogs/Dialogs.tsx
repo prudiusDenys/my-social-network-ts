@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Dialogs.module.css";
-import Contacts from "./Contacts/Contacts";
 import AllMessagesContainer from "./AllMessages/AllMessagesContainer";
+import ContactsContainer from "./Contacts/ContactsContainer";
 
 
 const Dialogs = () => {
@@ -11,7 +11,7 @@ const Dialogs = () => {
 				Your Massages
 			</div>
 			<div className={classes.dialogsBox}>
-				<Contacts/>
+				<ContactsContainer/>
 				<AllMessagesContainer/>
 			</div>
 		</div>
