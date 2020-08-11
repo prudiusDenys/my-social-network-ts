@@ -1,6 +1,5 @@
 import {dialogsReducer} from "./dialogsReducer";
 import {profileReducer} from "./profileReducer";
-import {StoreType} from "./store";
 import {combineReducers, createStore} from "redux";
 
 
@@ -10,4 +9,4 @@ const reducers = combineReducers({
 	}
 )
 
-export const store : StoreType = createStore(reducers)
+export const store = createStore(reducers)

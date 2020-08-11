@@ -11,7 +11,6 @@ const initialState = {
 };
 
 export const profileReducer = (state:ProfileType = initialState, action:ActionsTypes) => {
-
 	switch (action.type) {
 		case ADD_POST:
 			if (action.inputValue) {
@@ -24,7 +23,7 @@ export const profileReducer = (state:ProfileType = initialState, action:ActionsT
 			state.inputValue = action.inputValue
 			return state;
 		default:
-			return state;
+			return state
 	}
 }
 
