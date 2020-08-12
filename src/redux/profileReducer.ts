@@ -10,18 +10,24 @@ const initialState = {
 	]
 };
 
-export const profileReducer = (state:ProfileType = initialState, action:ActionsTypes) => {
+export const profileReducer = (state: ProfileType = initialState, action: ActionsTypes) => {
 	switch (action.type) {
-		case ADD_POST:
+		case ADD_POST: {
+			let stateCopy = {...state}
 			if (action.inputValue) {
 				let newPost = {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}
-				state.postData.push(newPost)
-				state.inputValue = '';
+				stateCopy.postData = [...state.postData]
+				stateCopy.postData.push(newPost)
+				stateCopy.inputValue = ''
 			}
-			return state;
-		case ON_CHANGE_INPUT:
-			state.inputValue = action.inputValue
-			return state;
+			return stateCopy;
+		}
+		case ON_CHANGE_INPUT: {
+			return {
+				...state,
+				inputValue: state.inputValue = action.inputValue
+			}
+		}
 		default:
 			return state
 	}
