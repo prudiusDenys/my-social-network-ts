@@ -15,17 +15,15 @@ export const profileReducer = (state: ProfileType = initialState, action: Action
 		case ADD_POST: {
 			let stateCopy = {...state}
 			if (action.inputValue) {
-				let newPost = {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}
-				stateCopy.postData = [...state.postData]
-				stateCopy.postData.push(newPost)
-				stateCopy.inputValue = ''
+				stateCopy.postData = [...state.postData, {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}]
+				stateCopy.inputValue = '';
 			}
 			return stateCopy;
 		}
 		case ON_CHANGE_INPUT: {
 			return {
 				...state,
-				inputValue: state.inputValue = action.inputValue
+				inputValue: action.inputValue
 			}
 		}
 		default:

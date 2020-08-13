@@ -38,16 +38,14 @@ export const dialogsReducer = (state: DialogsType = initialState, action: Action
 		case ADD_MESSAGE:
 			let stateCopy = {...state}
 			if (action.textAreaValue) {
-				let newMessage = {id: 4, text: action.textAreaValue}
-				stateCopy.sentMessages = [...state.sentMessages]
-				stateCopy.sentMessages.push(newMessage)
-				stateCopy.newMessageText = ''
+				stateCopy.sentMessages = [...state.sentMessages, {id: 4, text: action.textAreaValue}]
+				stateCopy.newMessageText = '';
 			}
 			return stateCopy;
-		case ON_CHANGE_TEXTAREA:{
+		case ON_CHANGE_TEXTAREA: {
 			return {
 				...state,
-				newMessageText: state.newMessageText = action.textAreaValue
+				newMessageText: action.textAreaValue
 			}
 		}
 		default:
