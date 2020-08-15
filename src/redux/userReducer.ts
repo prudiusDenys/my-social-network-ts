@@ -1,20 +1,20 @@
-type FollowType = {
+export type FollowType = {
 	type: 'FOLLOW'
 	userId: number
 }
-type UnFollowType = {
+export type UnFollowType = {
 	type: 'UNFOLLOW'
 	userId: number
 }
-type SetUsersType = {
+export type SetUsersType = {
 	type: 'SET_USERS',
 	users: Array<UsersObjType>
 }
-type ActionsType = FollowType | UnFollowType | SetUsersType;
+export type ActionsType = FollowType | UnFollowType | SetUsersType;
 export type UsersType = {
 	users:Array<UsersObjType>
 }
-type UsersObjType = {
+export type UsersObjType = {
 	id: number
 	photoUrl: string
 	followed: boolean
@@ -22,7 +22,7 @@ type UsersObjType = {
 	status: string
 	location: LocationType
 }
-type LocationType = {
+export type LocationType = {
 	city: string
 	country: string
 }
@@ -43,7 +43,7 @@ export const userReducer = (state: UsersType = initialState, action: ActionsType
 				...state,
 				users: state.users.map(u => {
 					if (u.id === action.userId) {
-						return {...u, followed: true}
+						return {...u, followed: false}
 					}
 					return u;
 				})
@@ -55,7 +55,7 @@ export const userReducer = (state: UsersType = initialState, action: ActionsType
 				...state,
 				users: state.users.map(u => {
 					if (u.id === action.userId) {
-						return {...u, followed: false}
+						return {...u, followed: true}
 					}
 					return u;
 				})
