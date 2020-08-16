@@ -16,11 +16,15 @@ export type UsersType = {
 }
 export type UsersObjType = {
 	id: number
-	photoUrl: string
+	photos: PhotosType
 	followed: boolean
-	fullName: string
+	name: string
 	status: string
 	location: LocationType
+}
+type PhotosType = {
+	small: string | undefined
+	large: string | undefined
 }
 export type LocationType = {
 	city: string
