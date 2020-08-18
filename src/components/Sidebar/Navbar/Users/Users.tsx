@@ -12,13 +12,13 @@ export type ReactComponentType = {
 }
 
 class Users extends React.Component<ReactComponentType> {
-	constructor(props: any) {
-		super(props);
+	componentDidMount() {
 		axios.get('https://social-network.samuraijs.com/api/1.0/users')
 			.then(response => {
 				this.props.setUsers(response.data.items)
 			})
 	}
+
 	render() {
 		return (
 			<div>
@@ -31,8 +31,12 @@ class Users extends React.Component<ReactComponentType> {
 						<div>
 							{
 								u.followed ?
-									<button onClick={() => {this.props.follow(u.id)}}>Follow</button> :
-									<button onClick={() => {this.props.unFollow(u.id)}}>Unfollow</button>
+									<button onClick={() => {
+										this.props.follow(u.id)
+									}}>Follow</button> :
+									<button onClick={() => {
+										this.props.unFollow(u.id)
+									}}>Unfollow</button>
 							}
 						</div>
 					</span>
