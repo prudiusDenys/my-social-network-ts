@@ -22,7 +22,7 @@ export type UsersObjType = {
 	status: string
 	location: LocationType
 }
-type PhotosType = {
+export type PhotosType = {
 	small: string | undefined
 	large: string | undefined
 }
@@ -66,7 +66,7 @@ export const userReducer = (state: UsersType = initialState, action: ActionsType
 			}
 		}
 		case SET_USERS:{
-			return {...state, users: [...state.users, ...action.users]}
+			return {...state, users: action.users}
 		}
 		default:
 			return state
