@@ -13,7 +13,6 @@ type PropsType = {
 	unFollow: (userId: number) => void
 }
 
-
 let Users = (props: PropsType) => {
 
 	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
