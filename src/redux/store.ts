@@ -1,4 +1,4 @@
-import {profileReducer} from "./profileReducer";
+import {profileReducer, SetUserProfileType} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 
 export type StoreType = {
@@ -17,6 +17,7 @@ export type ActionsTypes =
 	| OnChangeInputActionType
 	| AddMessageActionType
 	| OnChangeTextareaActionType
+	| SetUserProfileType
 export type DialogsType = {
 	newMessageText: string
 	contactsData: Array<UserDataType>
