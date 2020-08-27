@@ -8,7 +8,7 @@ type PropsType = {
 }
 
 const Contacts = (props: PropsType) => {
-				let contactElement = props.contactsData.map(c=><ContactUser id={c.id} name={c.name} avatarUrl={c.avatarUrl}/>)
+				let contactElement = props.contactsData.map(c=><ContactUser key={c.id} id={c.id} name={c.name} avatarUrl={c.avatarUrl}/>)
 				return(
 					<div className={classes.contactsList}>
 						<div className={classes.contactsListTitle}>

@@ -11,7 +11,7 @@ type PropsType = {
 
 const Posts = (props: PropsType) => {
 
-	let postElement = props.postData.map(p => <Post name={p.name} time={p.time} text={p.text}/>)
+	let postElement = props.postData.map(p => <Post key={p.id} name={p.name} time={p.time} text={p.text}/>)
 
 	return (
 		<div className={classes.postsWrapper}>
