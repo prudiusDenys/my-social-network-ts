@@ -1,5 +1,6 @@
 import {profileReducer, SetUserProfileType} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
+import {ContactsType, DataProfileUserIdType} from "../components/Sidebar/Navbar/Profile/ProfileContainer";
 
 export type StoreType = {
 	_state: StateType
@@ -66,58 +67,58 @@ export type OnChangeTextareaActionType = {
 }
 
 
-const store: StoreType = {
-	_state: {
-		profile: {
-			inputValue: 'It-Inkubator',
-			postData: [
-				{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
-			]
-		},
-		dialogs: {
-			newMessageText: '',
-			contactsData: [
-				{
-					id: 1,
-					name: 'Mark Gruk',
-					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
-				},
-				{
-					id: 2,
-					name: 'Alina Morgunova',
-					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
-				},
-				{
-					id: 3,
-					name: 'Rustam Gasanov',
-					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
-				},
-			],
-			sentMessages: [
-				{id: 1, text: 'Hello. My name is Denis'},
-				{id: 2, text: 'What come over you ?'},
-				{id: 3, text: 'Nice nice nice'}
-			],
-			gotMessages: [
-				{id: 1, fullName: 'Mark', text: 'Hello. My name is Mark'},
-				{id: 2, fullName: 'Mark', text: 'I live in Kiev'},
-			],
-		}
-	},
-	_callSubscriber() {
-		console.log('state changed')
-	},
-	getState() {
-		return this._state
-	},
-	subscribe(observer) {
-		this._callSubscriber = observer
-	},
-	dispatch(action) {
-		this._state.profile = profileReducer(this._state.profile, action);
-		this._state.dialogs = dialogsReducer(this._state.dialogs, action);
-		this._callSubscriber();
-	}
-}
+// const store: StoreType = {
+// 	_state: {
+// 		profile: {
+// 			inputValue: 'It-Inkubator',
+// 			postData: [
+// 				{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
+// 			],
+// 		},
+// 		dialogs: {
+// 			newMessageText: '',
+// 			contactsData: [
+// 				{
+// 					id: 1,
+// 					name: 'Mark Gruk',
+// 					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
+// 				},
+// 				{
+// 					id: 2,
+// 					name: 'Alina Morgunova',
+// 					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
+// 				},
+// 				{
+// 					id: 3,
+// 					name: 'Rustam Gasanov',
+// 					avatarUrl: 'https://media.gqitalia.it/photos/5ec3ca47a63ee8cb452d9ce4/16:9/w_1920,c_limit/Avatar.jpg'
+// 				},
+// 			],
+// 			sentMessages: [
+// 				{id: 1, text: 'Hello. My name is Denis'},
+// 				{id: 2, text: 'What come over you ?'},
+// 				{id: 3, text: 'Nice nice nice'}
+// 			],
+// 			gotMessages: [
+// 				{id: 1, fullName: 'Mark', text: 'Hello. My name is Mark'},
+// 				{id: 2, fullName: 'Mark', text: 'I live in Kiev'},
+// 			],
+// 		}
+// 	},
+// 	_callSubscriber() {
+// 		console.log('state changed')
+// 	},
+// 	getState() {
+// 		return this._state
+// 	},
+// 	subscribe(observer) {
+// 		this._callSubscriber = observer
+// 	},
+// 	dispatch(action) {
+// 		this._state.profile = profileReducer(this._state.profile, action);
+// 		this._state.dialogs = dialogsReducer(this._state.dialogs, action);
+// 		this._callSubscriber();
+// 	}
+// }
 
-export default store;
+// export default store;

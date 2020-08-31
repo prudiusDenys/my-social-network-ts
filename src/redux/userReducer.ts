@@ -13,6 +13,10 @@ export type SetUsersType = {
 export type ActionsType = FollowType | UnFollowType | SetUsersType | SetCurrentPageType| SetUsersTotalCountType | ToggleIsFetchingType;
 export type UsersType = {
 	users:Array<UsersObjType>
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
+	isFetching: boolean
 }
 export type UsersObjType = {
 	id: number
@@ -68,7 +72,7 @@ export const userReducer = (state: UsersType = initialState, action: ActionsType
 				...state,
 				users: state.users.map(u => {
 					if (u.id === action.userId) {
-						return {...u, followed: false}
+						return {...u, followed: true}
 					}
 					return u;
 				})
@@ -80,7 +84,7 @@ export const userReducer = (state: UsersType = initialState, action: ActionsType
 				...state,
 				users: state.users.map(u => {
 					if (u.id === action.userId) {
-						return {...u, followed: true}
+						return {...u, followed: false}
 					}
 					return u;
 				})

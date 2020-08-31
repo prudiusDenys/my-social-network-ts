@@ -1,6 +1,4 @@
 export type ActionsType = SetUserDataType;
-
-
 export type InitialStateType = {
 	userId: null | number
 	email: null | string
@@ -8,7 +6,6 @@ export type InitialStateType = {
 	isAuth: boolean
 
 }
-
 export type SetUserDataType = {
 	type: typeof SET_USER_DATA
 	data: DataType

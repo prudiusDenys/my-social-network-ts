@@ -4,6 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile} from "../../../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
+import {rootReducers} from "../../../../redux/redux-store";
 
 
 export type DataProfileUserIdType = {
@@ -15,7 +16,7 @@ export type DataProfileUserIdType = {
 	"userId": number
 	photos: PhotosType
 }
-type ContactsType = {
+export type ContactsType = {
 	"facebook": string,
 	"website": null,
 	"vk": string,
@@ -28,6 +29,10 @@ type ContactsType = {
 type PhotosType = {
 	small: string
 	large: string
+}
+
+type ReactComponentType = {
+	DataProfileUserIdType:DataProfileUserIdType
 }
 
 class ProfileContainer extends React.Component<any, any> {
