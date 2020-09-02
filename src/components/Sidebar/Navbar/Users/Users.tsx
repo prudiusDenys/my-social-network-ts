@@ -30,7 +30,10 @@ let Users = (props: PropsType) => {
 		<div>
 			{pages.map(p => {
 				return <span key={p.toString()} className={props.currentPage === p ? classes.selectedPage : ''}
-										 onClick={(e) => {props.onPageChanged(p)}}>{p}</span>})}
+										 onClick={(e) => {
+											 props.onPageChanged(p)
+										 }}>{p}</span>
+			})}
 		</div>
 		{
 			props.users.map(u => <div key={u.id}>
@@ -43,8 +46,8 @@ let Users = (props: PropsType) => {
 						<div>
 							{
 								u.followed ?
-									<button disabled={props.followingProgress.some(id=>id === u.id)} onClick={() => {
-										props.toggleFollowingProgress(true,u.id)
+									<button disabled={props.followingProgress.some(id => id === u.id)} onClick={() => {
+										props.toggleFollowingProgress(true, u.id)
 										axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
 											withCredentials: true,
 											headers: {
@@ -58,8 +61,8 @@ let Users = (props: PropsType) => {
 												props.toggleFollowingProgress(false, u.id)
 											})
 									}}>Unfollow</button> :
-									<button disabled={props.followingProgress.some(id=>id === u.id)} onClick={() => {
-										props.toggleFollowingProgress(true,u.id)
+									<button disabled={props.followingProgress.some(id => id === u.id)} onClick={() => {
+										props.toggleFollowingProgress(true, u.id)
 										axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
 											withCredentials: true,
 											headers: {
@@ -70,7 +73,7 @@ let Users = (props: PropsType) => {
 												if (response.data.resultCode === 0) {
 													props.follow(u.id)
 												}
-												props.toggleFollowingProgress(false,u.id)
+												props.toggleFollowingProgress(false, u.id)
 											})
 									}}>Follow</button>
 							}
