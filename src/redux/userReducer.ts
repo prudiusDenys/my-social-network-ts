@@ -81,7 +81,6 @@ const initialState = {
 };
 
 export const userReducer = (state: UsersType = initialState, action: ActionsType) => {
-	debugger
 	switch (action.type) {
 		case FOLLOW: {
 			return {
@@ -131,13 +130,13 @@ export const userReducer = (state: UsersType = initialState, action: ActionsType
 	}
 }
 
-export const follow = (userId: number): FollowType => {
+export const followSuccess = (userId: number): FollowType => {
 	return {
 		type: FOLLOW,
 		userId
 	}
 }
-export const unFollow = (userId: number): UnFollowType => {
+export const unFollowSuccess = (userId: number): UnFollowType => {
 	return {
 		type: UNFOLLOW,
 		userId
@@ -182,6 +181,30 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 			dispatch(toggleIsFetching(false))
 			dispatch(setUsers(data.items))
 			dispatch(setTotalUsersCount(data.totalCount))
+		})
+	}
+}
+
+export const follow = (userId: number) => {
+	return (dispatch: Function) => {
+		dispatch(toggleFollowingProgress(true, userId))
+		usersAPI.follow(userId).then(response => {
+			if (response.data.resultCode === 0) {
+				dispatch(followSuccess(userId))
+			}
+			dispatch(toggleFollowingProgress(false, userId))
+		})
+	}
+}
+
+export const unFollow = (userId: number) => {
+	return (dispatch: Function) => {
+		dispatch(toggleFollowingProgress(true, userId))
+		usersAPI.unFollow(userId).then(response => {
+			if (response.data.resultCode === 0) {
+				dispatch(unFollowSuccess(userId))
+			}
+			dispatch(toggleFollowingProgress(false, userId))
 		})
 	}
 }

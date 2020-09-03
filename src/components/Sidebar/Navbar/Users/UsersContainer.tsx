@@ -24,6 +24,7 @@ export type ReactComponentType = {
 	toggleIsFetching: (isFetching: boolean) => void
 	toggleFollowingProgress: (isFetching: boolean) => void
 	followingProgress: Array<number>
+
 }
 
 class UsersContainer extends React.Component<any> {
@@ -45,7 +46,6 @@ class UsersContainer extends React.Component<any> {
 						 users={this.props.users}
 						 follow={this.props.follow}
 						 unFollow={this.props.unFollow}
-						 toggleFollowingProgress={this.props.toggleFollowingProgress}
 						 followingProgress={this.props.followingProgress}/>
 		</>
 	}
