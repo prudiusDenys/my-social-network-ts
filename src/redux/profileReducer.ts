@@ -1,4 +1,5 @@
 import {ActionsTypes, AddPostActionType, OnChangeInputActionType, ProfileType} from "./store";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const ON_CHANGE_INPUT = 'ON_CHANGE_INPUT';
@@ -62,4 +63,9 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
 		type: SET_USER_PROFILE,
 		profile
 	}
+}
+export const getUserProfile = (userId: number) => (dispatch: Function)=> {
+	usersAPI.getProfile(userId).then(response => {
+		dispatch(setUserProfile(response.data))
+	})
 }
