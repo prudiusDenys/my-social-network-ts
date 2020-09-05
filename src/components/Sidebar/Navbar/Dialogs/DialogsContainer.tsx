@@ -2,16 +2,11 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import AllMessagesContainer from "./AllMessages/AllMessagesContainer";
 import ContactsContainer from "./Contacts/ContactsContainer";
-import { Redirect } from "react-router-dom";
+import {connect} from "react-redux";
+import Dialogs from "./Dialogs";
 
-type PropsType = {
-	isAuth: boolean
-}
 
-const Dialogs = (props: PropsType) => {
-	if(!props.isAuth){
-		return <Redirect to={'/login'}/>
-	}
+const Dialogs1 = () => {
 	return (
 		<div className={classes.dialogs}>
 			<div className={classes.title}>
@@ -25,4 +20,14 @@ const Dialogs = (props: PropsType) => {
 	)
 }
 
-export default Dialogs;
+const mapStateToProps = (state: any) => {
+	return {
+		isAuth: state.auth.isAuth
+	}
+}
+const mapDispatchToProps = (dispatch: any) => {
+}
+
+const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+
+export default DialogsContainer;
