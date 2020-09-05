@@ -1,6 +1,7 @@
 import React from "react";
 import Preloader from "../../../../common/preloader/Preloader";
 import {DataProfileUserIdType} from "../ProfileContainer";
+import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type PropsType = {
 	profile: DataProfileUserIdType
@@ -17,7 +18,7 @@ export const ProfileInfo = (props: PropsType) => {
 				</div>
 			<div>
 				<img src={props.profile.photos.large} alt=""/>
-				ava + description
+				<ProfileStatus status={'Hello'}/>
 			</div>
 		</div>
 	)
