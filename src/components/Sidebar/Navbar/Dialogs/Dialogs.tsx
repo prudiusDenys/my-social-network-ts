@@ -2,16 +2,8 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import AllMessagesContainer from "./AllMessages/AllMessagesContainer";
 import ContactsContainer from "./Contacts/ContactsContainer";
-import { Redirect } from "react-router-dom";
 
-type PropsType = {
-	isAuth: boolean
-}
-
-const Dialogs = (props: PropsType) => {
-	if(!props.isAuth){
-		return <Redirect to={'/login'}/>
-	}
+const Dialogs = () => {
 	return (
 		<div className={classes.dialogs}>
 			<div className={classes.title}>

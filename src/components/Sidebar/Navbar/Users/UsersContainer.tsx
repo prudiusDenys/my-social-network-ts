@@ -9,6 +9,7 @@ import {
 import Users from "./Users";
 import Preloader from "../../../common/preloader/Preloader";
 import {rootReducers} from "../../../../redux/redux-store";
+import {WithAuthRedirect} from "../../../../hoc/WithAuthRedirect";
 
 export type ReactComponentType = {
 	users: Array<UsersObjType>
@@ -62,6 +63,6 @@ const mapStateToProps = (state: rootReducers) => {
 	}
 }
 
-export default connect(mapStateToProps, {
+export default WithAuthRedirect(connect(mapStateToProps, {
 	follow, unFollow, setCurrentPage, toggleFollowingProgress, getUsers
-})(UsersContainer)
+})(UsersContainer))
