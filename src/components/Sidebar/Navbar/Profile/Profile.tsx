@@ -7,13 +7,17 @@ import {DataProfileUserIdType} from "./ProfileContainer";
 
 type PropsType = {
 	profile: DataProfileUserIdType
+	status: any
+	updateStatus: any
 }
 
 const Profile = (props: PropsType) => {
 	return (
 		<div className={classes.profile}>
 			<NewPostContainer/>
-			<ProfileInfo profile={props.profile}/>
+			<ProfileInfo profile={props.profile}
+									 status={props.status}
+									 updateStatus={props.updateStatus}/>
 			<PostsContainer/>
 		</div>
 	)

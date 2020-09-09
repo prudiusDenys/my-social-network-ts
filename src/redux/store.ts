@@ -1,6 +1,5 @@
-import {profileReducer, SetUserProfileType} from "./profileReducer";
-import {dialogsReducer} from "./dialogsReducer";
-import {ContactsType, DataProfileUserIdType} from "../components/Sidebar/Navbar/Profile/ProfileContainer";
+import {SetUserProfileType} from "./profileReducer";
+
 
 export type StoreType = {
 	_state: StateType
@@ -18,7 +17,7 @@ export type ActionsTypes =
 	| OnChangeInputActionType
 	| AddMessageActionType
 	| OnChangeTextareaActionType
-	| SetUserProfileType
+	| SetUserProfileType | setStatusType
 export type DialogsType = {
 	newMessageText: string
 	contactsData: Array<UserDataType>
@@ -65,7 +64,10 @@ export type OnChangeTextareaActionType = {
 	type: 'ON_CHANGE_TEXTAREA'
 	textAreaValue: string
 }
-
+export type setStatusType = {
+	type : 'SET_STATUS'
+	status: string
+}
 
 // const store: StoreType = {
 // 	_state: {

@@ -1,9 +1,8 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile} from "../../../../redux/profileReducer";
+import {getStatus, getUserProfile, updateStatus} from "../../../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
-import {WithAuthRedirect} from "../../../../hoc/WithAuthRedirect";
 
 
 export type DataProfileUserIdType = {
@@ -39,13 +38,16 @@ class ProfileContainer extends React.Component<any, any> {
 	componentDidMount() {
 		let userId = this.props.match.params.userId
 		if (!userId) {
-			userId = 2
+			userId = 9232
 		}
 		this.props.getUserProfile(userId);
+		this.props.getStatus(userId)
 	}
 
 	render() {
-		return <Profile profile={this.props.profile}/>
+		return <Profile profile={this.props.profile}
+										status={this.props.status}
+										updateStatus={this.props.updateStatus}/>
 	}
 }
 
@@ -60,10 +62,11 @@ class ProfileContainer extends React.Component<any, any> {
 
 let mapStateToProps = (state: any) => {
 	return {
-		profile: state.profile.profile
+		profile: state.profile.profile,
+		status: state.profile.status
 	}
 }
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {getUserProfile, getStatus, updateStatus})(WithUrlDataContainerComponent);

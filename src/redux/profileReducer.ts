@@ -1,9 +1,10 @@
 import {ActionsTypes, AddPostActionType, OnChangeInputActionType, ProfileType} from "./store";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const ON_CHANGE_INPUT = 'ON_CHANGE_INPUT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 export type SetUserProfileType = {
 	type: typeof SET_USER_PROFILE
@@ -15,7 +16,9 @@ const initialState = {
 	postData: [
 		{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
 	],
-	profile: null
+	profile: null,
+	status: ''
+
 };
 
 export const profileReducer = (state: ProfileType = initialState, action: ActionsTypes) => {
@@ -38,6 +41,12 @@ export const profileReducer = (state: ProfileType = initialState, action: Action
 			return {
 				...state,
 				profile: action.profile
+			}
+		}
+		case SET_STATUS: {
+			return {
+				...state,
+				status: action.status
 			}
 		}
 		default:
@@ -64,8 +73,27 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
 		profile
 	}
 }
-export const getUserProfile = (userId: number) => (dispatch: Function)=> {
+export const getUserProfile = (userId: number) => (dispatch: Function) => {
 	usersAPI.getProfile(userId).then(response => {
 		dispatch(setUserProfile(response.data))
 	})
+}
+
+export const getStatus = (userId: number) => (dispatch: Function) => {
+	profileAPI.getStatus(userId).then(response => {
+		dispatch(setStatus(response.data))
+	})
+}
+
+export const updateStatus = (status: string) => (dispatch: Function) => {
+	profileAPI.updateStatus(status)
+		.then(response => {
+			if (response.data.resultCode === 0) {
+				dispatch(setStatus(status))
+			}
+		})
+}
+
+export const setStatus = (status: string) => {
+	return {type: SET_STATUS, status}
 }
