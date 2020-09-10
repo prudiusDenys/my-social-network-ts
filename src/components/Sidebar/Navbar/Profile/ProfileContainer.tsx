@@ -59,7 +59,6 @@ class ProfileContainer extends React.Component<any, any> {
 // )(ProfileContainer)
 
 
-
 let mapStateToProps = (state: any) => {
 	return {
 		profile: state.profile.profile,
