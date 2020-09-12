@@ -1,33 +1,41 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import classes from "./NewPost.module.css";
 import Avatar from "../../../../../common/Avatar/Avatar";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type PropsType = {
-	inputValue: string
-	addPost:(inputValue: string | undefined)=>void
-	onChangeInput:(inputValue: string)=>void
+	// inputValue: string
+	addPost: (inputValue: string) => void
+}
+type NewPostType = {
+	newPost: string
 }
 
 const NewPost = (props: PropsType) => {
 
-	let onChange = React.createRef<HTMLInputElement>();
-
-	let onClickHandler = () => {
-		props.addPost(onChange.current?.value)
-	}
-
-	let onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		props.onChangeInput(e.currentTarget.value)
+	const addNewPost = (formData: NewPostType) => {
+		props.addPost(formData.newPost)
 	}
 
 	return (
 		<div className={classes.newPost}>
-				<Avatar/>
+			<Avatar/>
 			<div className={classes.input}>
-				<input onChange={onChangeHandler} ref={onChange} type="text" placeholder={'Say something'} value={props.inputValue}/>
-				<button onClick={onClickHandler}>SHARE</button>
+				<NewPostRedux onSubmit={addNewPost}/>
 			</div>
 		</div>
 	)
 }
+
+const newPostForm: React.FC<InjectedFormProps<NewPostType>> = (props) => {
+	return (
+		<form onSubmit={props.handleSubmit}>
+			<Field component={'input'} name={'newPost'} placeholder={'Say something'}/>
+			<button>SHARE</button>
+		</form>
+	)
+}
+
+const NewPostRedux = reduxForm<NewPostType>({form: 'profileAddNewPostForm'})(newPostForm)
+
 export default NewPost;

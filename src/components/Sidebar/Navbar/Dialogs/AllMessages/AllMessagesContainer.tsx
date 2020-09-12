@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessageActionCreator, onChangeTextareaActionCreator} from "../../../../../redux/dialogsReducer";
+import {addMessageActionCreator} from "../../../../../redux/dialogsReducer";
 import AllMessages from "./AllMessages";
 import {connect} from "react-redux";
 import {rootReducers} from "../../../../../redux/redux-store";
@@ -17,10 +17,7 @@ let mapDispatchToProps = (dispatch:any) => {
 	return {
 		addMessage: (messageValue: string | undefined) => {
 			dispatch(addMessageActionCreator(messageValue))
-		},
-		onChangeTextarea: (textareaValue: string) => {
-			dispatch(onChangeTextareaActionCreator(textareaValue))
-		},
+		}
 	}
 }
 

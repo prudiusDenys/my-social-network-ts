@@ -1,7 +1,7 @@
-import {ActionsTypes, AddMessageActionType, DialogsType, OnChangeTextareaActionType} from "./store";
+import {ActionsTypes, AddMessageActionType, DialogsType} from "./store";
 
 const ADD_MESSAGE = 'ADD_MESSAGE';
-const ON_CHANGE_TEXTAREA = 'ON_CHANGE_TEXTAREA';
+
 
 const initialState = {
 	newMessageText: '',
@@ -42,12 +42,6 @@ export const dialogsReducer = (state: DialogsType = initialState, action: Action
 				stateCopy.newMessageText = '';
 			}
 			return stateCopy;
-		case ON_CHANGE_TEXTAREA: {
-			return {
-				...state,
-				newMessageText: action.textAreaValue
-			}
-		}
 		default:
 			return state
 	}
@@ -56,13 +50,6 @@ export const dialogsReducer = (state: DialogsType = initialState, action: Action
 export const addMessageActionCreator = (textAreaValue: string | undefined): AddMessageActionType => {
 	return {
 		type: ADD_MESSAGE,
-		textAreaValue: textAreaValue
-	}
-}
-
-export const onChangeTextareaActionCreator = (textAreaValue: string): OnChangeTextareaActionType => {
-	return {
-		type: ON_CHANGE_TEXTAREA,
 		textAreaValue: textAreaValue
 	}
 }

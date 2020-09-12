@@ -1,8 +1,7 @@
-import {ActionsTypes, AddPostActionType, OnChangeInputActionType, ProfileType} from "./store";
+import {ActionsTypes, AddPostActionType, ProfileType} from "./store";
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const ON_CHANGE_INPUT = 'ON_CHANGE_INPUT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -12,7 +11,7 @@ export type SetUserProfileType = {
 }
 
 const initialState = {
-	inputValue: 'It-Inkubator',
+	// inputValue: 'It-Inkubator',
 	postData: [
 		{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
 	],
@@ -27,15 +26,9 @@ export const profileReducer = (state: ProfileType = initialState, action: Action
 			let stateCopy = {...state}
 			if (action.inputValue) {
 				stateCopy.postData = [...state.postData, {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}]
-				stateCopy.inputValue = '';
+				// stateCopy.inputValue = '';
 			}
 			return stateCopy;
-		}
-		case ON_CHANGE_INPUT: {
-			return {
-				...state,
-				inputValue: action.inputValue
-			}
 		}
 		case SET_USER_PROFILE: {
 			return {
@@ -54,16 +47,9 @@ export const profileReducer = (state: ProfileType = initialState, action: Action
 	}
 }
 
-export const addPostActionCreator = (inputValue: string | undefined): AddPostActionType => {
+export const addPostActionCreator = (inputValue: string): AddPostActionType => {
 	return {
 		type: ADD_POST,
-		inputValue: inputValue
-	}
-}
-
-export const onChangeInputActionCreator = (inputValue: string): OnChangeInputActionType => {
-	return {
-		type: ON_CHANGE_INPUT,
 		inputValue: inputValue
 	}
 }

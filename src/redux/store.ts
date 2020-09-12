@@ -39,7 +39,7 @@ export type GotMessagesType = {
 	text: string
 }
 export type ProfileType = {
-	inputValue: string
+	// inputValue: string
 	postData: Array<PostDataType>
 }
 export type PostDataType = {

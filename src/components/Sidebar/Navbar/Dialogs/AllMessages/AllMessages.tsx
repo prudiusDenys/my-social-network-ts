@@ -1,10 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import classes from "./AllMessages.module.css";
 import ListMessages from "./ListMessages/ListMessages";
 import {
 	GotMessagesType,
 	SentMessagesType
 } from "../../../../../redux/store";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
 type PropsType = {
@@ -12,18 +13,15 @@ type PropsType = {
 	gotMessages: Array<GotMessagesType>
 	newMessageText: string
 	addMessage: (messageValue: string | undefined) => void
-	onChangeTextarea: (textareaValue: string) => void
+}
+type TextAreaType = {
+	newMessageBody: string
 }
 
 const AllMessages = (props: PropsType) => {
 
-	let onChange = React.createRef<HTMLTextAreaElement>()
-
-	let onClickHandler = () => {
-		props.addMessage(onChange.current?.value)
-	}
-	let onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		props.onChangeTextarea(e.currentTarget.value)
+	let addNewMessage = (formData: TextAreaType) => {
+			props.addMessage(formData.newMessageBody)
 	}
 
 	return (
@@ -32,14 +30,26 @@ const AllMessages = (props: PropsType) => {
 				Write your message
 			</div>
 			<div className={classes.message}>
-				<textarea ref={onChange} onChange={onChangeHandler} placeholder={'Your message...'}
-									value={props.newMessageText}> </textarea>
-				<button onClick={onClickHandler}>Send message</button>
+				<AddMessageFormRedux onSubmit={addNewMessage} />
 			</div>
 			<ListMessages sentMessages={props.sentMessages}
 										gotMessages={props.gotMessages}/>
 		</div>
 	)
 }
+
+
+const AddMessageForm : React.FC<InjectedFormProps<TextAreaType>> = (props) => {
+	return(
+		<form onSubmit={props.handleSubmit} className={classes.message}>
+				<div>
+					<Field component={'textarea'} name={'newMessageBody'} placeholder={'Your message...'}/>
+					<button>Send message</button>
+				</div>
+		</form >
+	)
+}
+
+const AddMessageFormRedux = reduxForm<TextAreaType>({form: 'dialogAddMessageForm'})(AddMessageForm)
 
 export default AllMessages;
