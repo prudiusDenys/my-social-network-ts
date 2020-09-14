@@ -6,6 +6,8 @@ import {
 	SentMessagesType
 } from "../../../../../redux/store";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../../../../../common/FormsControlls/FormsControlls";
+import {maxLengthCreator, requiredField} from "../../../../../utils/validators/validators";
 
 
 type PropsType = {
@@ -17,6 +19,8 @@ type PropsType = {
 type TextAreaType = {
 	newMessageBody: string
 }
+
+const maxLength100 = maxLengthCreator(100)
 
 const AllMessages = (props: PropsType) => {
 
@@ -43,7 +47,8 @@ const AddMessageForm : React.FC<InjectedFormProps<TextAreaType>> = (props) => {
 	return(
 		<form onSubmit={props.handleSubmit} className={classes.message}>
 				<div>
-					<Field component={'textarea'} name={'newMessageBody'} placeholder={'Your message...'}/>
+					<Field component={Textarea}
+								 validate={[requiredField,maxLength100]} name={'newMessageBody'} placeholder={'Your message...'}/>
 					<button>Send message</button>
 				</div>
 		</form >
