@@ -8,7 +8,7 @@ import Music from "./components/Sidebar/Navbar/Music/Music";
 import UsersContainer from "./components/Sidebar/Navbar/Users/UsersContainer";
 import ProfileContainer from "./components/Sidebar/Navbar/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {Login} from "./components/Login/Login";
+import Login from "./components/Login/Login";
 import DialogsContainer from "./components/Sidebar/Navbar/Dialogs/DialogsContainer";
 
 function App() {
