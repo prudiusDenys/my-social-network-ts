@@ -65,6 +65,5 @@ const mapStateToProps = (state: rootReducers) => {
 }
 
 export default compose(
-	WithAuthRedirect,
 	connect(mapStateToProps, {follow, unFollow, setCurrentPage, toggleFollowingProgress, getUsers}))
 	(UsersContainer)

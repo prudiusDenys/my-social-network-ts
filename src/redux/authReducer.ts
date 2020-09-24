@@ -53,6 +53,8 @@ export const getAuthUserData = () => (dispatch: Function) => {
 			dispatch(setUserData(id, email, login, true))
 		}
 	})
+
+
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Function) => {
