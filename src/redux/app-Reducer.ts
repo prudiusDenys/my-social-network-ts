@@ -1,4 +1,5 @@
 import {getAuthUserData} from "./authReducer";
+import {Dispatch} from "redux";
 
 
 export type InitialStateType = {
@@ -30,8 +31,9 @@ export const initializedSuccess = () => {
 }
 
 export const initializeApp = () => (dispatch: Function) => {
+	debugger
 	let promise = dispatch(getAuthUserData())
-	promise.all([promise])
+	Promise.all([promise])
 		.then(()=>{
 			dispatch(initializedSuccess());
 		})

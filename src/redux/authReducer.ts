@@ -1,5 +1,6 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {Dispatch} from "redux";
 
 export type ActionsType = SetUserDataType;
 export type InitialStateType = {

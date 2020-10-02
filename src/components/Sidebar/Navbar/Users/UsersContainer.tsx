@@ -9,7 +9,6 @@ import {
 import Users from "./Users";
 import Preloader from "../../../common/preloader/Preloader";
 import {rootReducers} from "../../../../redux/redux-store";
-import {WithAuthRedirect} from "../../../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
 export type ReactComponentType = {

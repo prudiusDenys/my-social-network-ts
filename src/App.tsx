@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Sidebar from "./components/Sidebar/Sidebar";
 import {Route, withRouter} from "react-router-dom";
@@ -16,10 +16,7 @@ import {initializeApp} from "./redux/app-Reducer";
 import Preloader from "./components/common/preloader/Preloader";
 
 
-
-
-class App extends React.Component<any,any> {
-
+class App extends React.Component<any, any> {
 
 	componentDidMount() {
 		this.props.initializeApp()
@@ -43,16 +40,17 @@ class App extends React.Component<any,any> {
 					<Route path={'/login'} render={() => <Login/>}/>
 				</div>
 			</div>
-		);
+		)
 	}
 }
 
-
 const mapStateToProps = (state: any) => ({
-		initialized: state.app.initialized
-	})
+	initialized: state.app.initialized
+})
+
+export default compose<React.ComponentType>(withRouter, connect(mapStateToProps, {initializeApp}))(App)
 
 
-export default compose(
-	withRouter,
-	(connect(mapStateToProps, {initializeApp}))(App));
+// export default compose<React.ComponentType>(
+// 	withRouter,
+// 	(connect(mapStateToProps, {initializeApp}))(App))
