@@ -1,7 +1,5 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {Dispatch} from "redux";
-
 export type ActionsType = SetUserDataType;
 export type InitialStateType = {
 	userId: null | number
@@ -54,8 +52,6 @@ export const getAuthUserData = () => (dispatch: Function) => {
 			dispatch(setUserData(id, email, login, true))
 		}
 	})
-
-
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Function) => {

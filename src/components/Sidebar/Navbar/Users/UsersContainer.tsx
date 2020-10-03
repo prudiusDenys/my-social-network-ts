@@ -14,7 +14,7 @@ import {
 	getCurrentPage, getFollowingProgress,
 	getIsFetching,
 	getPageSize,
-	getTotalUsersCount, getUsers
+	getTotalUsersCount, getUsers,
 } from "../../../../redux/users-selectors";
 
 export type ReactComponentType = {
