@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import Sidebar from "./components/Sidebar/Sidebar";
 import {Route, withRouter} from "react-router-dom";
