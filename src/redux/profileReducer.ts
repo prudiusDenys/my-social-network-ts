@@ -59,25 +59,21 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
 		profile
 	}
 }
-export const getUserProfile = (userId: number) => (dispatch: Function) => {
-	usersAPI.getProfile(userId).then(response => {
+export const getUserProfile = (userId: number) => async (dispatch: Function) => {
+	let response = await usersAPI.getProfile(userId)
 		dispatch(setUserProfile(response.data))
-	})
 }
 
-export const getStatus = (userId: number) => (dispatch: Function) => {
-	profileAPI.getStatus(userId).then(response => {
+export const getStatus = (userId: number) => async (dispatch: Function) => {
+	let response = await profileAPI.getStatus(userId)
 		dispatch(setStatus(response.data))
-	})
 }
 
-export const updateStatus = (status: string) => (dispatch: Function) => {
-	profileAPI.updateStatus(status)
-		.then(response => {
+export const updateStatus = (status: string) => async (dispatch: Function) => {
+	let response = await profileAPI.updateStatus(status)
 			if (response.data.resultCode === 0) {
 				dispatch(setStatus(status))
 			}
-		})
 }
 
 export const setStatus = (status: string) => {

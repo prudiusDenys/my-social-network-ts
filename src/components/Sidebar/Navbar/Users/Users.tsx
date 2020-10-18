@@ -1,8 +1,7 @@
 import React from "react";
-import classes from "./Users.module.css";
-import userPhoto from "../../../../assets/images/user.png";
 import {UsersObjType} from "../../../../redux/userReducer";
-import {NavLink} from "react-router-dom";
+import {Pagination} from "../../../../common/Pagination/Pagination";
+import {User} from "./User";
 
 type PropsType = {
 	users: Array<UsersObjType>
@@ -16,50 +15,17 @@ type PropsType = {
 }
 
 let Users = (props: PropsType) => {
-	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-	let pages: Array<number> = []
-	for (let i = 1; i <= pagesCount; i++) {
-		pages.push(i)
-	}
-
-	return <div>
-		<div>
-			{pages.map(p => {
-				return <span key={p.toString()} className={props.currentPage === p ? classes.selectedPage : ''}
-										 onClick={(e) => {
-											 props.onPageChanged(p)
-										 }}>{p}</span>
-			})}
-		</div>
-		{
-			props.users.map(u => <div key={u.id}>
-					<span>
-						<div>
-							<NavLink to={'/profile/' + u.id}>
-								<img src={u.photos.small !== null ? u.photos.small : userPhoto} alt="" className={classes.userPhoto}/>
-							</NavLink>
-						</div>
-						<div>
-							{
-								u.followed
-									? <button disabled={props.followingProgress.some(id => id ===u.id)} onClick={() => {props.unFollow(u.id)}}>Unfollow</button>
-									: <button disabled={props.followingProgress.some(id => id ===u.id)} onClick={() => {props.follow(u.id)}}>Follow</button>
-							}
-						</div>
-					</span>
-				<span>
-						<span>
-							<div>{u.name}</div>
-							<div>{u.status}</div>
-						</span>
-						<span>
-							<div>{'u.location.country'}</div>
-							<div>{'u.location.city'}</div>
-						</span>
-					</span>
-			</div>)
-		}
-	</div>
+	return <>
+			<Pagination currentPage={props.currentPage}
+									onPageChanged={props.onPageChanged}
+									pageSize={props.pageSize}
+									totalUsersCount={props.totalUsersCount}/>
+			{props.users.map(u => <User key={u.id}
+																	 unFollow={props.unFollow}
+																	 follow={props.follow}
+																	 user={u}
+																	 followingProgress={props.followingProgress}/>)}
+	</>
 }
 
 export default Users

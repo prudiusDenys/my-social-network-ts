@@ -1,7 +1,6 @@
 import React from "react";
 import Preloader from "../../../../common/preloader/Preloader";
 import {DataProfileUserIdType} from "../ProfileContainer";
-import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
 
 type PropsType = {

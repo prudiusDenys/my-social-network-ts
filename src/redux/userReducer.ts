@@ -1,4 +1,5 @@
 import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type FollowType = {
 	type: 'FOLLOW'
@@ -175,38 +176,36 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): To
 }
 
 export const requestUsers = (currentPage: number, pageSize: number) => {
-	return (dispatch: Function) => {
+	return async (dispatch: Function) => {
 		dispatch(toggleIsFetching(true));
 		dispatch(setCurrentPage(currentPage))
 
-		usersAPI.getUsers(currentPage, pageSize).then(data => {
-			dispatch(toggleIsFetching(false))
-			dispatch(setUsers(data.items))
-			dispatch(setTotalUsersCount(data.totalCount))
-		})
+		let data = await usersAPI.getUsers(currentPage, pageSize)
+		dispatch(toggleIsFetching(false))
+		dispatch(setUsers(data.items))
+		dispatch(setTotalUsersCount(data.totalCount))
 	}
 }
 
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: any, actionCreator: any) => {
+	dispatch(toggleFollowingProgress(true, userId))
+	let response = await apiMethod(userId)
+	if (response.data.resultCode === 0) {
+		dispatch(actionCreator(userId))
+	}
+	dispatch(toggleFollowingProgress(false, userId))
+}
+
 export const follow = (userId: number) => {
-	return (dispatch: Function) => {
-		dispatch(toggleFollowingProgress(true, userId))
-		usersAPI.follow(userId).then(response => {
-			if (response.data.resultCode === 0) {
-				dispatch(followSuccess(userId))
-			}
-			dispatch(toggleFollowingProgress(false, userId))
-		})
+	return async (dispatch: Dispatch) => {
+		let apiMethod = usersAPI.follow.bind(usersAPI)
+		followUnfollowFlow(dispatch, userId, apiMethod, followSuccess)
 	}
 }
 
 export const unFollow = (userId: number) => {
-	return (dispatch: Function) => {
-		dispatch(toggleFollowingProgress(true, userId))
-		usersAPI.unFollow(userId).then(response => {
-			if (response.data.resultCode === 0) {
-				dispatch(unFollowSuccess(userId))
-			}
-			dispatch(toggleFollowingProgress(false, userId))
-		})
+	return async (dispatch: Dispatch) => {
+		let apiMethod = usersAPI.unFollow.bind(usersAPI)
+		followUnfollowFlow(dispatch, userId, apiMethod, unFollowSuccess)
 	}
 }

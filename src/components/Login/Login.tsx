@@ -5,7 +5,7 @@ import {Input} from "../../common/FormsControlls/FormsControlls";
 import {requiredField} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/authReducer";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import classes from './../../common/FormsControlls/FormsControlls.module.css';
 
 
@@ -16,13 +16,13 @@ type FormDataType = {
 }
 
 
-const Login = (props:any) => {
+const Login = (props: any) => {
 
 	const onSubmit = (formData: FormDataType) => {
 		props.login(formData.email, formData.password, formData.rememberMe)
 	}
 
-	if(props.isAuth){
+	if (props.isAuth) {
 		return <Redirect to={'/profile'}/>
 	}
 	return (
@@ -33,9 +33,9 @@ const Login = (props:any) => {
 	)
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={handleSubmit}>
 			<div>
 				<Field type="text" validate={[requiredField]} placeholder={'Email'} name={'email'} component={Input}/>
 			</div>
@@ -45,9 +45,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 			<div>
 				<Field type="checkbox" validate={[]} name={'rememberMe'} component={Input}/> remember me
 			</div>
-			{props.error && <div className={classes.formSummaryError}>
-				{props.error}
-			</div>}
+			{error && <div className={classes.formSummaryError}>
+				{error}
+      </div>}
 			<div>
 				<button>Login</button>
 			</div>
@@ -56,9 +56,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 }
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
-const mapStateToProps = (state:any) => {
-	return{
+const mapStateToProps = (state: any) => {
+	return {
 		isAuth: state.auth.isAuth
 	}
 }
-export default connect(mapStateToProps,{login})(Login)
+export default connect(mapStateToProps, {login})(Login)
