@@ -1,3 +1,17 @@
+
+.pagination{
+	display: flex;
+	margin-bottom: 30px;
+}
+.btnPrev{
+	margin-right: 10px;
+}
+.btnNext{
+	margin-left: 10px;
+}
 .selectedPage {
-	font-weight: 700;
+	 font-weight: 700;
+ }
+span{
+	cursor: pointer;
 }
