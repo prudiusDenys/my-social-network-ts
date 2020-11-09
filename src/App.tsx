@@ -34,7 +34,7 @@ class App extends React.Component<any, any> {
 				<Sidebar/>
 				<div className='content-wrapper'>
 					<Route path={'/profile/:userId?'}
-								 render={WithSuspense(DialogsContainer)}/>
+								 render={WithSuspense(ProfileContainer)}/>
 					<Route path={'/dialogs'} render={() => {
 						return (
 							<Suspense fallback={<div>Loading...</div>}>
