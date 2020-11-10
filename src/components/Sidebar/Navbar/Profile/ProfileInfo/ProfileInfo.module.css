@@ -1,0 +1,5 @@
+.mainPhoto{
+  max-width: 200px;
+  width: 100%;
+  object-fit: cover;
+}

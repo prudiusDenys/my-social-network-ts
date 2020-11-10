@@ -3,7 +3,6 @@ import classes from "./Users.module.css";
 import userPhoto from "../../../../assets/images/user.png";
 import {UsersObjType} from "../../../../redux/userReducer";
 import {NavLink} from "react-router-dom";
-import {Pagination} from "../../../../common/Pagination/Pagination";
 
 type PropsType = {
 	user: UsersObjType

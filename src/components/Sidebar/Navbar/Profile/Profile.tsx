@@ -9,6 +9,8 @@ type PropsType = {
 	profile: DataProfileUserIdType
 	status: any
 	updateStatus: any
+	isOwner: boolean
+	savePhoto: any
 }
 
 const Profile = (props: PropsType) => {
@@ -17,7 +19,9 @@ const Profile = (props: PropsType) => {
 			<NewPostContainer/>
 			<ProfileInfo profile={props.profile}
 									 status={props.status}
-									 updateStatus={props.updateStatus}/>
+									 updateStatus={props.updateStatus}
+									 isOwner={props.isOwner}
+									 savePhoto={props.savePhoto}/>
 			<PostsContainer/>
 		</div>
 	)

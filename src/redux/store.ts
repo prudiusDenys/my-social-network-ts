@@ -1,4 +1,4 @@
-import {SetUserProfileType} from "./profileReducer";
+import {savePhotoSuccess, SetUserProfileType} from "./profileReducer";
 
 
 export type StoreType = {
@@ -17,7 +17,9 @@ export type ActionsTypes =
 	| OnChangeInputActionType
 	| AddMessageActionType
 	| OnChangeTextareaActionType
-	| SetUserProfileType | setStatusType
+	| SetUserProfileType
+	| setStatusType
+| ReturnType<typeof  savePhotoSuccess>
 export type DialogsType = {
 	newMessageText: string
 	contactsData: Array<UserDataType>
