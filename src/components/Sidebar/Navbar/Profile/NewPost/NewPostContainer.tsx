@@ -9,7 +9,6 @@ import {StateType} from "../../../../../redux/store";
 
 let mapStateProps = (state: StateType) => {
 	return {
-		// inputValue: state.profile.inputValue,
 	}
 }
 

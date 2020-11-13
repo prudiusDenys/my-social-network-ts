@@ -35,8 +35,8 @@ export const Pagination = (props: PropsType) => {
 			</div>
 			{
 				pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-					.map(p => {
-						return <span className={props.currentPage === p ? classes.selectedPage : ''}
+					.map((p,i) => {
+						return <span key={i} className={props.currentPage === p ? classes.selectedPage : ''}
 												 onClick={(e) => {
 													 props.onPageChanged(p)
 												 }}>{p}</span>

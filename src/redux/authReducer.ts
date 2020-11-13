@@ -87,6 +87,7 @@ export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
 export const logout = () => async (dispatch: Dispatch) => {
 	let response = await authAPI.logout()
 	if (response.data.resultCode === 0) {
+		debugger
 		dispatch(setUserData(null, null, null, false))
 	}
 }
