@@ -12,30 +12,40 @@ import classes from './../../common/FormsControlls/FormsControlls.module.css';
 type FormDataType = {
 	email: string
 	password: string
-	rememberMe: boolean
+	rememberMe: boolean,
+	captcha: any,
 }
 
+type LoginFormOwnProps = {
+	captchaUrl: string | null
+}
 
 const Login = (props: any) => {
 
 	const onSubmit = (formData: FormDataType) => {
-		props.login(formData.email, formData.password, formData.rememberMe)
+		props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
 	}
 
 	if (props.isAuth) {
 		return <Redirect to={'/profile'}/>
 	}
+
 	return (
 		<div>
 			<h1>LOGIN</h1>
-			<LoginReduxForm onSubmit={onSubmit}/>
+			<LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
 		</div>
 	)
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & LoginFormOwnProps> = ({handleSubmit, error, captchaUrl}) => {
 	return (
 		<form onSubmit={handleSubmit}>
+
+			{captchaUrl && <img src={captchaUrl} alt=""/>}
+			{captchaUrl && <Field type="text" validate={[requiredField]} placeholder={'Symbols from image'} name={'captcha'}
+                            component={Input}/>}
+
 			<div>
 				<Field type="text" validate={[requiredField]} placeholder={'Email'} name={'email'} component={Input}/>
 			</div>
@@ -56,10 +66,11 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubm
 	)
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType, LoginFormOwnProps>({form: 'login'})(LoginForm)
 const mapStateToProps = (state: any) => {
 	return {
-		isAuth: state.auth.isAuth
+		isAuth: state.auth.isAuth,
+		captchaUrl: state.auth.captchaUrl
 	}
 }
 export default connect(mapStateToProps, {login})(Login)
