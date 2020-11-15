@@ -80,19 +80,32 @@ const ProfileData = (props: ProfileDataType) => {
 		<div className={classes.profileData}>
 			<div className={classes.wrapper}>
 				<div className={classes.profileDataItem}>
-					<b>Full name</b>: {props.profile.fullName}
+					<b>Full name</b>:
+					<span className={classes.itemSpam}>
+							{props.profile.fullName}
+					</span>
+
 				</div>
 				<div className={classes.profileDataItem}>
-					<b>Looking for a job</b>: {props.profile.lookingForAJob ? 'Yes' : 'no'}
+					<b>Looking for a job</b>:
+					<span className={classes.itemSpam}>
+							{props.profile.lookingForAJob ? 'Yes' : 'no'}
+					</span>
 				</div>
 				{
 					props.profile.lookingForAJob &&
           <div className={classes.profileDataItem}>
-            <b>My professional skills</b>: {props.profile.lookingForAJobDescription}
+            <b>My professional skills</b>:
+						<span className={classes.itemSpam}>
+							{props.profile.lookingForAJobDescription}
+						</span>
           </div>
 				}
 				<div className={classes.profileDataItem}>
-					<b>About me</b>: {props.profile.aboutMe}
+					<b>About me</b>:
+					<span className={classes.itemSpam}>
+						{props.profile.aboutMe}
+					</span>
 				</div>
 			</div>
 			<div className={classes.profileDataItem + '' + classes.wrapper}>

@@ -46,3 +46,6 @@
   cursor: pointer;
   margin-top: 15px;
 }
+.itemSpam{
+  display: block;
+}
