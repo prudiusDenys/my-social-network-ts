@@ -29,12 +29,12 @@ class App extends React.Component<any, any> {
 		}
 		return (
 			<div className="App">
-					<HeaderContainer/>
-					<Sidebar/>
+				<HeaderContainer/>
+				<Sidebar/>
 
-					<div className='content-wrapper'>
-						<Switch>
-						<Route exact path={'/'} render={() => <Redirect from="/" to="/profile" />}/>
+				<div className='content-wrapper'>
+					<Switch>
+						<Route exact path={'/'} render={() => <Redirect from="/" to="/profile"/>}/>
 						<Route path={'/profile/:userId?'} render={WithSuspense(ProfileContainer)}/>
 						<Route path={'/dialogs'} render={() => {
 							return (
@@ -49,8 +49,8 @@ class App extends React.Component<any, any> {
 						<Route path={'/settings'} render={() => <Settings/>}/>
 						<Route path={'/login'} render={() => <Login/>}/>
 						<Route render={() => <div>404 NOT FOUND</div>}/>
-						</Switch>
-					</div>
+					</Switch>
+				</div>
 
 			</div>
 		)

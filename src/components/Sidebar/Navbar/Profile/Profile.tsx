@@ -4,6 +4,7 @@ import NewPostContainer from "./NewPost/NewPostContainer";
 import PostsContainer from "./Posts/PostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {DataProfileUserIdType} from "./ProfileContainer";
+import { Redirect } from "react-router-dom";
 
 type PropsType = {
 	profile: DataProfileUserIdType
@@ -12,9 +13,15 @@ type PropsType = {
 	isOwner: boolean
 	savePhoto: any
 	saveProfile: any
+	isAuth: boolean
 }
 
 const Profile = (props: PropsType) => {
+
+	if(!props.isAuth){
+		return <Redirect to={'/login'}/>
+	}
+
 	return (
 		<div className={classes.profile}>
 			<NewPostContainer/>

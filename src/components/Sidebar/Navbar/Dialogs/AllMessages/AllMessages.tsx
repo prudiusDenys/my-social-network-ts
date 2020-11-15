@@ -5,9 +5,10 @@ import {
 	GotMessagesType,
 	SentMessagesType
 } from "../../../../../redux/store";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm, reset} from "redux-form";
 import {Textarea} from "../../../../../common/FormsControlls/FormsControlls";
 import {maxLengthCreator, requiredField} from "../../../../../utils/validators/validators";
+import {useDispatch} from "react-redux";
 
 
 type PropsType = {
@@ -24,8 +25,11 @@ const maxLength100 = maxLengthCreator(100)
 
 const AllMessages = (props: PropsType) => {
 
+	const dispatch = useDispatch()
+
 	let addNewMessage = (formData: TextAreaType) => {
 			props.addMessage(formData.newMessageBody)
+		dispatch(reset('dialogAddMessageForm'));
 	}
 
 	return (

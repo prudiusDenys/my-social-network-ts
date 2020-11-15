@@ -1,8 +1,9 @@
 import React from "react";
 import Profile from "./Profile";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from "../../../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
+import {rootReducers} from "../../../../redux/redux-store";
 
 
 export type DataProfileUserIdType = {
@@ -35,6 +36,7 @@ type ReactComponentType = {
 
 class ProfileContainer extends React.Component<any, any> {
 
+
 	refreshProfile() {
 		let userId = this.props.match.params.userId
 		if (!userId) {
@@ -63,7 +65,8 @@ class ProfileContainer extends React.Component<any, any> {
 										updateStatus={this.props.updateStatus}
 										isOwner={!this.props.match.params.userId}
 										savePhoto={this.props.savePhoto}
-										saveProfile={this.props.saveProfile}/>
+										saveProfile={this.props.saveProfile}
+										isAuth={this.props.isAuth}/>
 	}
 }
 

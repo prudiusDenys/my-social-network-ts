@@ -4,9 +4,10 @@ import Avatar from "../../../../../common/Avatar/Avatar";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../../../utils/validators/validators";
 import {Input} from "../../../../../common/FormsControlls/FormsControlls";
+import {reset} from 'redux-form';
+import {useDispatch} from "react-redux";
 
 type PropsType = {
-	// inputValue: string
 	addPost: (inputValue: string) => void
 }
 type NewPostType = {
@@ -17,8 +18,11 @@ const maxLength10 = maxLengthCreator(10)
 
 const NewPost = (props: PropsType) => {
 
+	const dispatch = useDispatch()
+
 	const addNewPost = (formData: NewPostType) => {
 		props.addPost(formData.newPost)
+		dispatch(reset('profileAddNewPostForm'));
 	}
 
 	return (
@@ -33,11 +37,11 @@ const NewPost = (props: PropsType) => {
 
 const newPostForm: React.FC<InjectedFormProps<NewPostType>> = (props) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
-			<Field component={Input} name={'newPost'} placeholder={'Say something'}
-						 validate={[requiredField, maxLength10]}/>
-			<button>SHARE</button>
-		</form>
+			<form style={{display: 'flex'}} onSubmit={props.handleSubmit}>
+				<Field component={Input} name={'newPost'} placeholder={'Say something'}
+							 validate={[requiredField, maxLength10]}/>
+				<button>SHARE</button>
+			</form>
 	)
 }
 

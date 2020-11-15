@@ -15,6 +15,12 @@ const Header = (props: PropsType) => {
 		<div className={classes.header}>
 			<div className={classes.homeLink}>
 				<a href="#">HOME</a>
+				{
+					props.isAuth &&
+          <div className={classes.profileLink}>
+            <HeaderProfileLink/>
+          </div>
+				}
 			</div>
 			<div className={classes.logo}>
 				DENZIMM Social Network
@@ -22,12 +28,11 @@ const Header = (props: PropsType) => {
 			<div className={classes.loginBlock}>
 				{props.isAuth ?
 					<div>
-						{props.login} - <button onClick={props.logout}> Log out </button>
+						{props.login} - <button className={classes.logOutBtn} onClick={props.logout}> Log out </button>
 					</div>
-					 : <NavLink to={'/login'}>Login</NavLink>}
+					: <NavLink to={'/login'}>Login</NavLink>}
 			</div>
 			<HeaderSearch/>
-			<HeaderProfileLink/>
 		</div>
 	)
 }

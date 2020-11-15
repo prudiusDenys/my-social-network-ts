@@ -1,5 +1,6 @@
 import React from "react";
 import {InjectedFormProps} from "redux-form";
+import styles from './Login.module.css'
 import {Field, reduxForm} from 'redux-form'
 import {Input} from "../../common/FormsControlls/FormsControlls";
 import {requiredField} from "../../utils/validators/validators";
@@ -20,6 +21,12 @@ type LoginFormOwnProps = {
 	captchaUrl: string | null
 }
 
+const stylesLogin = {
+	field:{
+
+	}
+}
+
 const Login = (props: any) => {
 
 	const onSubmit = (formData: FormDataType) => {
@@ -31,7 +38,7 @@ const Login = (props: any) => {
 	}
 
 	return (
-		<div>
+		<div className={styles.login}>
 			<h1>LOGIN</h1>
 			<LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
 		</div>
@@ -45,22 +52,22 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnPro
 			{captchaUrl && <img src={captchaUrl} alt=""/>}
 			{captchaUrl && <Field type="text" validate={[requiredField]} placeholder={'Symbols from image'} name={'captcha'}
                             component={Input}/>}
-
-			<div>
-				<Field type="text" validate={[requiredField]} placeholder={'Email'} name={'email'} component={Input}/>
+			<div className={styles.loginItem}>
+				<Field className={styles.field} type="text" validate={[requiredField]} placeholder={'Email'} name={'email'} component={Input}/>
 			</div>
-			<div>
-				<Field type="password" validate={[requiredField]} placeholder={'Password'} name={'password'} component={Input}/>
+			<div className={styles.loginItem}>
+				<Field className={styles.field} type="password" validate={[requiredField]} placeholder={'Password'} name={'password'} component={Input}/>
 			</div>
-			<div>
-				<Field type="checkbox" validate={[]} name={'rememberMe'} component={Input}/> remember me
+			<div className={styles.checkboxBox}>
+				<Field className={styles.checkbox} type="checkbox" validate={[]} name={'rememberMe'} component={Input}/>
+				<div className={styles.checkboxText}>remember me </div>
 			</div>
 			{error && <div className={classes.formSummaryError}>
 				{error}
       </div>
 			}
 			<div>
-				<button>Login</button>
+				<button className={styles.btn}>LOGIN</button>
 			</div>
 		</form>
 	)

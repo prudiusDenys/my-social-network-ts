@@ -2,7 +2,47 @@
   max-width: 200px;
   width: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 .contact{
-  padding-left: 10px;
+  /*margin-bottom: 10px;*/
+}
+.profileInfo{
+  margin-top: 30px;
+  background: white;
+  padding: 30px;
+}
+.profileInfoBox{
+  display: flex;
+  margin: 0 -15px;
+}
+.profileInfoItem{
+  margin: 0 15px;
+}
+
+.choosePhoto{
+  margin: 15px 0;
+  border: none;
+}
+.profileData{
+  font-size: 18px;
+  display: flex;
+  margin: 0 -15px;
+}
+.wrapper{
+  margin: 0 15px;
+  flex: 0 0 50%;
+}
+.profileDataItem{
+  margin-bottom: 10px;
+}
+.profileDataBtn{
+  background: #e04533;
+  border: none;
+  padding: 7px 30px;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
 }

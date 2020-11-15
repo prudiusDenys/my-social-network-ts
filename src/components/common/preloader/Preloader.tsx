@@ -1,11 +1,12 @@
-import preloader from "../../../assets/images/preloader.gif";
 import React from "react";
+import {CircularProgress} from "@material-ui/core";
+import classes from "./Preloader.module.css";
 
 
 const Preloader = () => {
 	return (
-		<div>
-			<img src={preloader} alt={''} style={{width: '60px', height: '60px'}}/>
+		<div className={classes.preloader}>
+			<CircularProgress />
 		</div>
 	)
 }

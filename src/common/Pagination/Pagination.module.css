@@ -5,9 +5,23 @@
 }
 .btnPrev{
 	margin-right: 10px;
+	background: #e04533;
+	border: none;
+	padding: 7px 15px;
+	color: white;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
 }
 .btnNext{
 	margin-left: 10px;
+	border: none;
+	background: #12b286;
+	padding: 7px 15px;
+	color: white;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
 }
 .selectedPage {
 	 font-weight: 700;

@@ -14,13 +14,11 @@ export type SetUserProfileType = {
 }
 
 const initialState = {
-	// inputValue: 'It-Inkubator',
 	postData: [
 		{id: 1, name: 'Denis', text: 'Hi everyone! Today I\'ve had a good day!!!', time: '1 minute ago'},
 	],
 	profile: null,
 	status: ''
-
 };
 
 export const profileReducer = (state: any = initialState, action: ActionsTypes) => {
@@ -29,11 +27,11 @@ export const profileReducer = (state: any = initialState, action: ActionsTypes) 
 			let stateCopy = {...state}
 			if (action.inputValue) {
 				stateCopy.postData = [...state.postData, {id: 2, name: 'Denis', text: action.inputValue, time: '2 minutes ago'}]
-				// stateCopy.inputValue = '';
 			}
 			return stateCopy;
 		}
 		case SET_USER_PROFILE: {
+			debugger
 			return {
 				...state,
 				profile: action.profile
